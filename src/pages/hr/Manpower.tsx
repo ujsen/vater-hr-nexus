@@ -1,30 +1,30 @@
 
 import { useState } from "react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Badge } from "@/components/ui/badge";
 import { 
   ArrowLeft, 
   Search, 
   Plus, 
   Users, 
-  Phone, 
-  Mail, 
-  MapPin,
-  Calendar,
-  Briefcase,
   Filter,
-  MoreVertical
+  Briefcase
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { EmployeeCard } from "@/components/hr/EmployeeCard";
+import { EmployeeForm } from "@/components/hr/EmployeeForm";
+import { useToast } from "@/hooks/use-toast";
 
 const Manpower = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState("all");
+  const [showEmployeeForm, setShowEmployeeForm] = useState(false);
+  const [editingEmployee, setEditingEmployee] = useState(null);
 
-  const employees = [
+  const [employees, setEmployees] = useState([
     {
       id: "EMP001",
       name: "Ahmed Al-Mansouri",
@@ -97,7 +97,7 @@ const Manpower = () => {
       joinDate: "2018-12-01",
       avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&h=100&fit=crop&crop=face"
     }
-  ];
+  ]);
 
   const filteredEmployees = employees.filter(employee => {
     const matchesSearch = employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -107,12 +107,39 @@ const Manpower = () => {
     return matchesSearch && matchesFilter;
   });
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Active": return "bg-green-500";
-      case "On Leave": return "bg-yellow-500";
-      case "Inactive": return "bg-red-500";
-      default: return "bg-gray-500";
+  const handleAddEmployee = () => {
+    setEditingEmployee(null);
+    setShowEmployeeForm(true);
+  };
+
+  const handleEditEmployee = (employee: any) => {
+    setEditingEmployee(employee);
+    setShowEmployeeForm(true);
+  };
+
+  const handleDeleteEmployee = (employeeId: string) => {
+    setEmployees(prev => prev.filter(emp => emp.id !== employeeId));
+    toast({
+      title: "Employee Deleted",
+      description: "Employee has been successfully removed.",
+    });
+  };
+
+  const handleSaveEmployee = (employeeData: any) => {
+    if (editingEmployee) {
+      setEmployees(prev => prev.map(emp => 
+        emp.id === employeeData.id ? employeeData : emp
+      ));
+      toast({
+        title: "Employee Updated",
+        description: "Employee information has been successfully updated.",
+      });
+    } else {
+      setEmployees(prev => [...prev, employeeData]);
+      toast({
+        title: "Employee Added",
+        description: "New employee has been successfully added.",
+      });
     }
   };
 
@@ -135,7 +162,10 @@ const Manpower = () => {
               <p className="text-gray-400">Manage your workforce</p>
             </div>
           </div>
-          <Button className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
+          <Button 
+            onClick={handleAddEmployee}
+            className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800"
+          >
             <Plus className="w-4 h-4 mr-2" />
             Add Employee
           </Button>
@@ -215,7 +245,9 @@ const Manpower = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-400 text-sm">Departments</p>
-                  <p className="text-2xl font-bold text-purple-400">6</p>
+                  <p className="text-2xl font-bold text-purple-400">
+                    {new Set(employees.map(emp => emp.department)).size}
+                  </p>
                 </div>
                 <Briefcase className="w-8 h-8 text-purple-400" />
               </div>
@@ -226,67 +258,23 @@ const Manpower = () => {
         {/* Employee Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredEmployees.map((employee) => (
-            <Card key={employee.id} className="bg-gray-800/50 border-gray-700 hover:border-gray-600 transition-all duration-300 hover:scale-105">
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <img 
-                      src={employee.avatar} 
-                      alt={employee.name}
-                      className="w-12 h-12 rounded-full object-cover"
-                    />
-                    <div>
-                      <h3 className="font-semibold text-white">{employee.name}</h3>
-                      <p className="text-sm text-gray-400">{employee.id}</p>
-                    </div>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Badge className={`${getStatusColor(employee.status)} text-white border-none`}>
-                      {employee.status}
-                    </Badge>
-                    <Button variant="ghost" size="sm">
-                      <MoreVertical className="w-4 h-4 text-gray-400" />
-                    </Button>
-                  </div>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-3">
-                <div className="flex items-center space-x-2 text-sm">
-                  <Briefcase className="w-4 h-4 text-gray-400" />
-                  <span className="text-white">{employee.position}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm">
-                  <Users className="w-4 h-4 text-gray-400" />
-                  <span className="text-gray-300">{employee.department}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm">
-                  <Mail className="w-4 h-4 text-gray-400" />
-                  <span className="text-gray-300">{employee.email}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm">
-                  <Phone className="w-4 h-4 text-gray-400" />
-                  <span className="text-gray-300">{employee.phone}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm">
-                  <MapPin className="w-4 h-4 text-gray-400" />
-                  <span className="text-gray-300">{employee.location}</span>
-                </div>
-                <div className="flex items-center space-x-2 text-sm">
-                  <Calendar className="w-4 h-4 text-gray-400" />
-                  <span className="text-gray-300">Joined {employee.joinDate}</span>
-                </div>
-                <div className="pt-3 flex space-x-2">
-                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
-                    View Profile
-                  </Button>
-                  <Button size="sm" className="flex-1 bg-blue-600 hover:bg-blue-700">
-                    Edit
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+            <EmployeeCard
+              key={employee.id}
+              employee={employee}
+              onEdit={handleEditEmployee}
+              onDelete={handleDeleteEmployee}
+            />
           ))}
         </div>
+
+        {/* Employee Form Modal */}
+        {showEmployeeForm && (
+          <EmployeeForm
+            employee={editingEmployee}
+            onClose={() => setShowEmployeeForm(false)}
+            onSave={handleSaveEmployee}
+          />
+        )}
       </div>
     </div>
   );
