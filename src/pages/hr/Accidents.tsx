@@ -1,0 +1,248 @@
+
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Badge } from "@/components/ui/badge";
+import { 
+  ArrowLeft, 
+  Search, 
+  Plus, 
+  AlertTriangle, 
+  Calendar, 
+  MapPin,
+  User,
+  Clock,
+  FileText,
+  Eye,
+  Edit
+} from "lucide-react";
+import { useNavigate } from "react-router-dom";
+
+const Accidents = () => {
+  const navigate = useNavigate();
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const accidents = [
+    {
+      id: "ACC001",
+      employeeName: "Ahmed Al-Mansouri",
+      employeeId: "EMP001",
+      date: "2024-01-15",
+      time: "14:30",
+      location: "Construction Site A",
+      type: "Minor Injury",
+      description: "Cut on hand while handling materials",
+      severity: "Low",
+      status: "Resolved",
+      reportedBy: "Site Supervisor",
+      actionTaken: "First aid provided, returned to work",
+      department: "Engineering"
+    },
+    {
+      id: "ACC002",
+      employeeName: "Mohammed Hassan",
+      employeeId: "EMP003",
+      date: "2024-01-10",
+      time: "09:15",
+      location: "Workshop Floor 2",
+      type: "Equipment Accident",
+      description: "Slip and fall near machinery",
+      severity: "Medium",
+      status: "Under Investigation",
+      reportedBy: "Workshop Manager",
+      actionTaken: "Medical examination, safety review initiated",
+      department: "Operations"
+    }
+  ];
+
+  const filteredAccidents = accidents.filter(accident => 
+    accident.employeeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    accident.id.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    accident.type.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
+  const getSeverityColor = (severity: string) => {
+    switch (severity) {
+      case "Low": return "bg-green-500";
+      case "Medium": return "bg-yellow-500";
+      case "High": return "bg-red-500";
+      default: return "bg-gray-500";
+    }
+  };
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Resolved": return "bg-green-500";
+      case "Under Investigation": return "bg-yellow-500";
+      case "Open": return "bg-red-500";
+      default: return "bg-gray-500";
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <div className="flex items-center justify-between mb-8">
+          <div className="flex items-center space-x-4">
+            <Button 
+              variant="outline" 
+              onClick={() => navigate('/hr')}
+              className="text-gray-300 border-gray-600 hover:bg-gray-700"
+            >
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Back to HR
+            </Button>
+            <div>
+              <h1 className="text-3xl font-bold text-white">Accidents Record</h1>
+              <p className="text-gray-400">Track and manage workplace incidents</p>
+            </div>
+          </div>
+          <Button className="bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800">
+            <Plus className="w-4 h-4 mr-2" />
+            Report Accident
+          </Button>
+        </div>
+
+        {/* Search */}
+        <div className="mb-8">
+          <div className="relative max-w-md">
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+            <Input
+              placeholder="Search accidents..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="pl-10 bg-gray-800 border-gray-700 text-white"
+            />
+          </div>
+        </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+          <Card className="bg-gray-800/50 border-gray-700">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-400 text-sm">Total Incidents</p>
+                  <p className="text-2xl font-bold text-white">{accidents.length}</p>
+                </div>
+                <AlertTriangle className="w-8 h-8 text-orange-400" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-800/50 border-gray-700">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-400 text-sm">This Month</p>
+                  <p className="text-2xl font-bold text-yellow-400">2</p>
+                </div>
+                <Calendar className="w-8 h-8 text-yellow-400" />
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-800/50 border-gray-700">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-400 text-sm">Resolved</p>
+                  <p className="text-2xl font-bold text-green-400">1</p>
+                </div>
+                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gray-800/50 border-gray-700">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-gray-400 text-sm">Open Cases</p>
+                  <p className="text-2xl font-bold text-red-400">1</p>
+                </div>
+                <div className="w-3 h-3 bg-red-500 rounded-full"></div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Accidents Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {filteredAccidents.map((accident) => (
+            <Card key={accident.id} className="bg-gray-800/50 border-gray-700 hover:border-gray-600 transition-all">
+              <CardHeader>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <AlertTriangle className="w-8 h-8 text-orange-400" />
+                    <div>
+                      <CardTitle className="text-white">{accident.id}</CardTitle>
+                      <p className="text-gray-400 text-sm">{accident.type}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Badge className={`${getSeverityColor(accident.severity)} text-white border-none`}>
+                      {accident.severity}
+                    </Badge>
+                    <Badge className={`${getStatusColor(accident.status)} text-white border-none`}>
+                      {accident.status}
+                    </Badge>
+                  </div>
+                </div>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p className="text-gray-400">Employee</p>
+                    <p className="text-white">{accident.employeeName}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400">Department</p>
+                    <p className="text-white">{accident.department}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400">Date & Time</p>
+                    <p className="text-white">{accident.date} at {accident.time}</p>
+                  </div>
+                  <div>
+                    <p className="text-gray-400">Location</p>
+                    <p className="text-white">{accident.location}</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="text-gray-400 text-sm">Description</p>
+                  <p className="text-white text-sm">{accident.description}</p>
+                </div>
+
+                <div>
+                  <p className="text-gray-400 text-sm">Action Taken</p>
+                  <p className="text-white text-sm">{accident.actionTaken}</p>
+                </div>
+
+                <div className="flex space-x-2 pt-2">
+                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                    <Eye className="w-3 h-3 mr-2" />
+                    View
+                  </Button>
+                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                    <Edit className="w-3 h-3 mr-2" />
+                    Edit
+                  </Button>
+                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                    <FileText className="w-3 h-3 mr-2" />
+                    Report
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default Accidents;
