@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -15,12 +14,16 @@ import {
   Eye,
   Upload,
   Folder,
-  File
+  File,
+  Shield,
+  DollarSign
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Documents = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
 
   const documents = [
@@ -111,6 +114,27 @@ const Documents = () => {
     }
   };
 
+  const handleUploadDocument = () => {
+    toast({
+      title: "Upload Document",
+      description: "Document upload functionality will be implemented soon.",
+    });
+  };
+
+  const handleViewDocument = (document: any) => {
+    toast({
+      title: "View Document",
+      description: `Opening ${document.name}...`,
+    });
+  };
+
+  const handleDownloadDocument = (document: any) => {
+    toast({
+      title: "Download Started",
+      description: `Downloading ${document.name}...`,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
       <div className="max-w-7xl mx-auto">
@@ -130,7 +154,10 @@ const Documents = () => {
               <p className="text-gray-400">Manage HR documents and files</p>
             </div>
           </div>
-          <Button className="bg-gradient-to-r from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-yellow-800">
+          <Button 
+            className="bg-gradient-to-r from-yellow-500 to-yellow-700 hover:from-yellow-600 hover:to-yellow-800"
+            onClick={handleUploadDocument}
+          >
             <Plus className="w-4 h-4 mr-2" />
             Upload Document
           </Button>
@@ -264,11 +291,21 @@ const Documents = () => {
                   </div>
 
                   <div className="flex space-x-2 pt-2">
-                    <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="flex-1 text-gray-300 border-gray-600"
+                      onClick={() => handleViewDocument(document)}
+                    >
                       <Eye className="w-3 h-3 mr-2" />
                       View
                     </Button>
-                    <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                    <Button 
+                      size="sm" 
+                      variant="outline" 
+                      className="flex-1 text-gray-300 border-gray-600"
+                      onClick={() => handleDownloadDocument(document)}
+                    >
                       <Download className="w-3 h-3 mr-2" />
                       Download
                     </Button>

@@ -18,9 +18,11 @@ import {
   Edit
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { useToast } from "@/hooks/use-toast";
 
 const Accidents = () => {
   const navigate = useNavigate();
+  const { toast } = useToast();
   const [searchTerm, setSearchTerm] = useState("");
 
   const accidents = [
@@ -80,6 +82,34 @@ const Accidents = () => {
     }
   };
 
+  const handleReportAccident = () => {
+    toast({
+      title: "Report Accident",
+      description: "Accident reporting form will be opened.",
+    });
+  };
+
+  const handleViewAccident = (accident: any) => {
+    toast({
+      title: "View Accident",
+      description: `Opening details for ${accident.id}`,
+    });
+  };
+
+  const handleEditAccident = (accident: any) => {
+    toast({
+      title: "Edit Accident",
+      description: `Editing accident report ${accident.id}`,
+    });
+  };
+
+  const handleGenerateReport = (accident: any) => {
+    toast({
+      title: "Generate Report",
+      description: `Generating report for ${accident.id}`,
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
       <div className="max-w-7xl mx-auto">
@@ -99,7 +129,10 @@ const Accidents = () => {
               <p className="text-gray-400">Track and manage workplace incidents</p>
             </div>
           </div>
-          <Button className="bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800">
+          <Button 
+            className="bg-gradient-to-r from-orange-500 to-orange-700 hover:from-orange-600 hover:to-orange-800"
+            onClick={handleReportAccident}
+          >
             <Plus className="w-4 h-4 mr-2" />
             Report Accident
           </Button>
@@ -223,15 +256,30 @@ const Accidents = () => {
                 </div>
 
                 <div className="flex space-x-2 pt-2">
-                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="flex-1 text-gray-300 border-gray-600"
+                    onClick={() => handleViewAccident(accident)}
+                  >
                     <Eye className="w-3 h-3 mr-2" />
                     View
                   </Button>
-                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="flex-1 text-gray-300 border-gray-600"
+                    onClick={() => handleEditAccident(accident)}
+                  >
                     <Edit className="w-3 h-3 mr-2" />
                     Edit
                   </Button>
-                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                  <Button 
+                    size="sm" 
+                    variant="outline" 
+                    className="flex-1 text-gray-300 border-gray-600"
+                    onClick={() => handleGenerateReport(accident)}
+                  >
                     <FileText className="w-3 h-3 mr-2" />
                     Report
                   </Button>
