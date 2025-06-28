@@ -22,16 +22,7 @@ export const EmployeeTableRow = ({ employee, onEdit, onDelete }: EmployeeTableRo
   return (
     <TableRow className="border-gray-700 hover:bg-gray-700/30">
       <TableCell className="text-blue-400 font-medium">{employee.id}</TableCell>
-      <TableCell>
-        <div className="flex items-center space-x-3">
-          <img 
-            src={employee.avatar} 
-            alt={employee.name}
-            className="w-8 h-8 rounded-full object-cover"
-          />
-          <span className="text-white font-medium">{employee.name}</span>
-        </div>
-      </TableCell>
+      <TableCell className="text-white font-medium">{employee.name}</TableCell>
       <TableCell className="text-gray-300">{employee.position}</TableCell>
       <TableCell className="text-gray-300">{employee.department}</TableCell>
       <TableCell className="text-gray-300">{employee.email}</TableCell>
