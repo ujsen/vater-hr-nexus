@@ -8,16 +8,14 @@ import {
   ArrowLeft, 
   Search, 
   Plus, 
-  Briefcase, 
+  Shield, 
   Calendar, 
-  MapPin,
   User,
-  Clock,
-  FileText,
   Eye,
   Download,
+  AlertTriangle,
   CheckCircle,
-  AlertTriangle
+  Clock
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -28,47 +26,41 @@ const WorkPermit = () => {
   const workPermits = [
     {
       id: "WP001",
-      employeeName: "Ahmed Al-Mansouri",
       employeeId: "EMP001",
-      permitNumber: "WP2024001",
-      type: "General Work Permit",
-      issueDate: "2020-03-15",
-      expiryDate: "2025-03-14",
+      employeeName: "Ahmed Al-Mansouri",
+      permitNumber: "WP-2024-001",
+      permitType: "General Work Permit",
+      issueDate: "2024-01-15",
+      expiryDate: "2025-01-14",
       status: "Active",
-      issuingAuthority: "UAE Ministry of Labour",
+      sponsor: "Al Rashid Construction LLC",
       profession: "Senior Engineer",
-      employer: "Construction Company LLC",
-      location: "Dubai",
       nationality: "UAE"
     },
     {
       id: "WP002",
-      employeeName: "Sarah Johnson",
       employeeId: "EMP002",
-      permitNumber: "WP2024002",
-      type: "Professional Work Permit",
-      issueDate: "2019-08-20",
+      employeeName: "Sarah Johnson",
+      permitNumber: "WP-2023-045",
+      permitType: "Professional Work Permit",
+      issueDate: "2023-08-20",
       expiryDate: "2024-08-19",
       status: "Expiring Soon",
-      issuingAuthority: "UAE Ministry of Labour",
+      sponsor: "Al Rashid Construction LLC",
       profession: "HR Manager",
-      employer: "Construction Company LLC",
-      location: "Abu Dhabi",
-      nationality: "USA"
+      nationality: "United Kingdom"
     },
     {
       id: "WP003",
-      employeeName: "Mohammed Hassan",
       employeeId: "EMP003",
-      permitNumber: "WP2024003",
-      type: "Skilled Work Permit",
-      issueDate: "2021-01-10",
-      expiryDate: "2026-01-09",
-      status: "Active",
-      issuingAuthority: "UAE Ministry of Labour",
+      employeeName: "Mohammed Hassan",
+      permitNumber: "WP-2024-023",
+      permitType: "Temporary Work Permit",
+      issueDate: "2024-01-10",
+      expiryDate: "2024-07-09",
+      status: "Under Review",
+      sponsor: "Al Rashid Construction LLC",
       profession: "Project Manager",
-      employer: "Construction Company LLC",
-      location: "Sharjah",
       nationality: "Egypt"
     }
   ];
@@ -84,17 +76,21 @@ const WorkPermit = () => {
       case "Active": return "bg-green-500";
       case "Expiring Soon": return "bg-yellow-500";
       case "Expired": return "bg-red-500";
-      case "Pending": return "bg-blue-500";
+      case "Under Review": return "bg-orange-500";
+      case "Suspended": return "bg-gray-500";
       default: return "bg-gray-500";
     }
   };
 
-  const getDaysUntilExpiry = (expiryDate: string) => {
-    const today = new Date();
-    const expiry = new Date(expiryDate);
-    const diffTime = expiry.getTime() - today.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays;
+  const getStatusIcon = (status: string) => {
+    switch (status) {
+      case "Active": return CheckCircle;
+      case "Expiring Soon": return AlertTriangle;
+      case "Expired": return AlertTriangle;
+      case "Under Review": return Clock;
+      case "Suspended": return AlertTriangle;
+      default: return Clock;
+    }
   };
 
   return (
@@ -112,13 +108,13 @@ const WorkPermit = () => {
               Back to HR
             </Button>
             <div>
-              <h1 className="text-3xl font-bold text-white">Work Permit Information</h1>
-              <p className="text-gray-400">Manage employee work authorization documents</p>
+              <h1 className="text-3xl font-bold text-white">Work Permits</h1>
+              <p className="text-gray-400">Manage employee work permits and documentation</p>
             </div>
           </div>
           <Button className="bg-gradient-to-r from-teal-500 to-teal-700 hover:from-teal-600 hover:to-teal-800">
             <Plus className="w-4 h-4 mr-2" />
-            Add Work Permit
+            Add Permit
           </Button>
         </div>
 
@@ -144,7 +140,7 @@ const WorkPermit = () => {
                   <p className="text-gray-400 text-sm">Total Permits</p>
                   <p className="text-2xl font-bold text-white">{workPermits.length}</p>
                 </div>
-                <Briefcase className="w-8 h-8 text-teal-400" />
+                <Shield className="w-8 h-8 text-teal-400" />
               </div>
             </CardContent>
           </Card>
@@ -153,7 +149,7 @@ const WorkPermit = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Active Permits</p>
+                  <p className="text-gray-400 text-sm">Active</p>
                   <p className="text-2xl font-bold text-green-400">
                     {workPermits.filter(p => p.status === "Active").length}
                   </p>
@@ -181,12 +177,12 @@ const WorkPermit = () => {
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Locations</p>
-                  <p className="text-2xl font-bold text-purple-400">
-                    {new Set(workPermits.map(p => p.location)).size}
+                  <p className="text-gray-400 text-sm">Under Review</p>
+                  <p className="text-2xl font-bold text-orange-400">
+                    {workPermits.filter(p => p.status === "Under Review").length}
                   </p>
                 </div>
-                <MapPin className="w-8 h-8 text-purple-400" />
+                <Clock className="w-8 h-8 text-orange-400" />
               </div>
             </CardContent>
           </Card>
@@ -194,80 +190,74 @@ const WorkPermit = () => {
 
         {/* Work Permits Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {filteredPermits.map((permit) => (
-            <Card key={permit.id} className="bg-gray-800/50 border-gray-700 hover:border-gray-600 transition-all">
-              <CardHeader>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <Briefcase className="w-8 h-8 text-teal-400" />
+          {filteredPermits.map((permit) => {
+            const StatusIcon = getStatusIcon(permit.status);
+            return (
+              <Card key={permit.id} className="bg-gray-800/50 border-gray-700">
+                <CardHeader>
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center space-x-3">
+                      <StatusIcon className="w-8 h-8 text-teal-400" />
+                      <div>
+                        <CardTitle className="text-white">{permit.employeeName}</CardTitle>
+                        <p className="text-gray-400 text-sm">{permit.permitNumber}</p>
+                      </div>
+                    </div>
+                    <Badge className={`${getStatusColor(permit.status)} text-white border-none`}>
+                      {permit.status}
+                    </Badge>
+                  </div>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
                     <div>
-                      <CardTitle className="text-white">{permit.employeeName}</CardTitle>
-                      <p className="text-gray-400 text-sm">{permit.permitNumber}</p>
+                      <p className="text-gray-400">Permit Type</p>
+                      <p className="text-white">{permit.permitType}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400">Profession</p>
+                      <p className="text-white">{permit.profession}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400">Issue Date</p>
+                      <p className="text-white">{permit.issueDate}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400">Expiry Date</p>
+                      <p className="text-white">{permit.expiryDate}</p>
                     </div>
                   </div>
-                  <Badge className={`${getStatusColor(permit.status)} text-white border-none`}>
-                    {permit.status}
-                  </Badge>
-                </div>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div>
-                    <p className="text-gray-400">Permit Type</p>
-                    <p className="text-white">{permit.type}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Profession</p>
-                    <p className="text-white">{permit.profession}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Issue Date</p>
-                    <p className="text-white">{permit.issueDate}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Expiry Date</p>
-                    <p className="text-white">{permit.expiryDate}</p>
-                    <p className="text-xs text-gray-500">
-                      {getDaysUntilExpiry(permit.expiryDate)} days remaining
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Location</p>
-                    <p className="text-white">{permit.location}</p>
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Nationality</p>
-                    <p className="text-white">{permit.nationality}</p>
-                  </div>
-                </div>
 
-                <div className="bg-gray-700/30 rounded-lg p-3">
-                  <div className="text-sm">
-                    <p className="text-gray-400">Issuing Authority</p>
-                    <p className="text-white">{permit.issuingAuthority}</p>
+                  <div className="bg-gray-700/30 rounded-lg p-3">
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <p className="text-gray-400">Sponsor</p>
+                        <p className="text-white">{permit.sponsor}</p>
+                      </div>
+                      <div>
+                        <p className="text-gray-400">Nationality</p>
+                        <p className="text-white">{permit.nationality}</p>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-sm mt-2">
-                    <p className="text-gray-400">Employer</p>
-                    <p className="text-white">{permit.employer}</p>
-                  </div>
-                </div>
 
-                <div className="flex space-x-2 pt-2">
-                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
-                    <Eye className="w-3 h-3 mr-2" />
-                    View
-                  </Button>
-                  <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
-                    <Download className="w-3 h-3 mr-2" />
-                    Download
-                  </Button>
-                  <Button size="sm" className="flex-1 bg-teal-600 hover:bg-teal-700">
-                    Edit
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
+                  <div className="flex space-x-2 pt-2">
+                    <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                      <Eye className="w-3 h-3 mr-2" />
+                      View
+                    </Button>
+                    <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                      <Download className="w-3 h-3 mr-2" />
+                      Download
+                    </Button>
+                    <Button size="sm" className="flex-1 bg-teal-600 hover:bg-teal-700">
+                      Edit
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            );
+          })}
         </div>
       </div>
     </div>

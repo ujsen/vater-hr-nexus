@@ -12,39 +12,37 @@ const FinalExit = () => {
   const [finalExitEmployees] = useState([
     {
       id: 1,
-      record: "EM764",
-      empName: "Gul Mat Khan Moeen Khan",
-      actualJob: "Roller Compactor Operator",
-      iqamaNo: "2318257926",
-      iqamaIssue: "2021-10-19",
-      iqamaExpiration: "2022-10-09",
-      passportIssue: "2019-05-06",
-      passportExpiration: "2024-05-04",
-      workpermitIssue: "2021-10-21",
-      workpermitExpiration: "2022-10-11",
-      joinedToCompany: "2013-08-10",
-      contractExpiration: "2022-10-09",
-      ibanBank: "SA2410000003486044000105",
-      endDate: "2022-11-29",
-      status: "FAINAL EXIT"
+      record: "GG1521",
+      empName: "JAFFAR OSMAN SAIED",
+      actualJob: "HEAVY DRIVER",
+      iqamaNo: "2500915281",
+      iqamaIssue: "2023-01-15",
+      iqamaExpiration: "2024-01-14",
+      passportIssue: "2020-05-10",
+      passportExpiration: "2025-05-09",
+      workpermitIssue: "2023-01-17",
+      workpermitExpiration: "2024-01-16",
+      contractExpiration: "2024-01-20",
+      ibanBank: "SA6910000003400001374502",
+      endDate: "2024-01-25",
+      status: "Final Exit"
     },
     {
       id: 2,
-      record: "EM780",
-      empName: "Hussein Hadi Mohammed Ghadan",
-      actualJob: "Mechanic",
-      iqamaNo: "2336313248",
-      iqamaIssue: "2020-11-19",
-      iqamaExpiration: "2022-11-05",
-      passportIssue: "2022-11-06",
-      passportExpiration: "2027-11-06",
-      workpermitIssue: "2021-11-06",
-      workpermitExpiration: "2022-11-06",
-      joinedToCompany: "2013-09-14",
-      contractExpiration: "2022-10-08",
-      ibanBank: "SA5510000003474218000107",
-      endDate: "",
-      status: "FAINAL EXIT"
+      record: "NS1602",
+      empName: "DIPAK UDHARKOTI KARKI",
+      actualJob: "Excavator Operator",
+      iqamaNo: "2511575140",
+      iqamaIssue: "2023-04-10",
+      iqamaExpiration: "2024-04-09",
+      passportIssue: "2019-03-15",
+      passportExpiration: "2024-03-14",
+      workpermitIssue: "2023-04-12",
+      workpermitExpiration: "2024-04-11",
+      contractExpiration: "2024-04-15",
+      ibanBank: "SA6910000003400001374503",
+      endDate: "2024-04-20",
+      status: "Final Exit"
     }
   ]);
 
@@ -63,8 +61,8 @@ const FinalExit = () => {
               Back
             </Button>
             <div>
-              <h1 className="text-3xl font-bold text-white">EMP FAINAL EXIT Record</h1>
-              <p className="text-gray-400">Total EMP FAINAL EXIT: 166</p>
+              <h1 className="text-3xl font-bold text-white">Final Exit Record</h1>
+              <p className="text-gray-400">Total EMP FINAL EXIT: 13</p>
             </div>
           </div>
           <Button className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800">
@@ -91,7 +89,6 @@ const FinalExit = () => {
                     <TableHead className="text-gray-300 font-semibold">Passport Expiration</TableHead>
                     <TableHead className="text-gray-300 font-semibold">workprmit Issue</TableHead>
                     <TableHead className="text-gray-300 font-semibold">workprmit Expiration</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Joined to Company</TableHead>
                     <TableHead className="text-gray-300 font-semibold">Contract Expiration</TableHead>
                     <TableHead className="text-gray-300 font-semibold">IBAN Bank</TableHead>
                     <TableHead className="text-gray-300 font-semibold">End Date</TableHead>
@@ -112,11 +109,10 @@ const FinalExit = () => {
                       <TableCell className="text-gray-300">{employee.passportExpiration}</TableCell>
                       <TableCell className="text-gray-300">{employee.workpermitIssue}</TableCell>
                       <TableCell className="text-gray-300">{employee.workpermitExpiration}</TableCell>
-                      <TableCell className="text-gray-300">{employee.joinedToCompany}</TableCell>
                       <TableCell className="text-gray-300">{employee.contractExpiration}</TableCell>
                       <TableCell className="text-gray-300">{employee.ibanBank}</TableCell>
                       <TableCell className="text-gray-300">{employee.endDate}</TableCell>
-                      <TableCell className="text-red-400">{employee.status}</TableCell>
+                      <TableCell className="text-green-400">{employee.status}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

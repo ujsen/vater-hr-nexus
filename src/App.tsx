@@ -22,6 +22,7 @@ import ManpowerStandby from "./pages/hr/ManpowerStandby";
 import Documents from "./pages/hr/Documents";
 import DrivingLicense from "./pages/hr/DrivingLicense";
 import AdvanceVoucher from "./pages/hr/AdvanceVoucher";
+import Workshop from "./pages/Workshop";
 
 const queryClient = new QueryClient();
 
@@ -49,6 +50,7 @@ const App = () => (
           <Route path="/hr/documents" element={<Documents />} />
           <Route path="/hr/driving-license" element={<DrivingLicense />} />
           <Route path="/hr/advance-voucher" element={<AdvanceVoucher />} />
+          <Route path="/workshop" element={<Workshop />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

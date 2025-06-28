@@ -7,14 +7,14 @@ import { Badge } from "@/components/ui/badge";
 import { 
   ArrowLeft, 
   Search, 
-  Clock, 
+  Plus, 
   Users, 
-  Calendar,
-  MapPin,
+  Clock,
   User,
-  Briefcase,
-  Phone,
-  Mail
+  Eye,
+  CheckCircle,
+  XCircle,
+  AlertCircle
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
@@ -24,78 +24,80 @@ const ManpowerStandby = () => {
 
   const standbyEmployees = [
     {
-      id: "EMP007",
-      name: "Ali Hassan",
-      position: "Electrical Technician",
-      department: "Engineering",
+      id: "SB001",
+      employeeId: "EMP101",
+      employeeName: "Ahmed Al-Zahra",
+      position: "Carpenter",
+      department: "Construction",
       availability: "Available",
       lastAssignment: "2024-01-10",
-      skills: ["Electrical Work", "Maintenance", "Safety Protocols"],
-      location: "Dubai",
-      phone: "+971 50 789 0123",
-      email: "ali.hassan@company.com",
+      skills: ["Carpentry", "Wood Work", "Furniture"],
       experience: "5 years",
-      certifications: ["Electrical License", "Safety Certificate"]
+      contactNumber: "+971 50 123 4567",
+      status: "Ready"
     },
     {
-      id: "EMP008",
-      name: "Fatima Al-Zahra",
-      position: "Administrative Assistant",
-      department: "Human Resources",
+      id: "SB002",
+      employeeId: "EMP102",
+      employeeName: "Mohammed Ali",
+      position: "Electrician",
+      department: "Electrical",
       availability: "On Assignment",
-      lastAssignment: "2024-01-20",
-      assignedTo: "Project Alpha",
-      skills: ["Office Administration", "Customer Service", "Data Entry"],
-      location: "Abu Dhabi",
-      phone: "+971 50 890 1234",
-      email: "fatima.zahra@company.com",
-      experience: "3 years",
-      certifications: ["Microsoft Office", "Customer Service"]
+      lastAssignment: "2024-01-15",
+      skills: ["Electrical Wiring", "Panel Installation", "Maintenance"],
+      experience: "8 years",
+      contactNumber: "+971 50 234 5678",
+      status: "Busy"
     },
     {
-      id: "EMP009",
-      name: "Omar Khalil",
-      position: "Heavy Equipment Operator",
-      department: "Operations",
+      id: "SB003",
+      employeeId: "EMP103",
+      employeeName: "Hassan Omar",
+      position: "Plumber",
+      department: "Plumbing",
       availability: "Available",
       lastAssignment: "2024-01-05",
-      skills: ["Crane Operation", "Excavator", "Safety Protocols"],
-      location: "Sharjah",
-      phone: "+971 50 901 2345",
-      email: "omar.khalil@company.com",
-      experience: "8 years",
-      certifications: ["Heavy Equipment License", "Safety Training"]
+      skills: ["Pipe Installation", "Water Systems", "Repairs"],
+      experience: "6 years",
+      contactNumber: "+971 50 345 6789",
+      status: "Ready"
     },
     {
-      id: "EMP010",
-      name: "Maryam Said",
-      position: "Quality Inspector",
-      department: "Operations",
+      id: "SB004",
+      employeeId: "EMP104",
+      employeeName: "Ali Hassan",
+      position: "Mason",
+      department: "Construction",
       availability: "On Leave",
-      lastAssignment: "2024-01-15",
-      leaveUntil: "2024-01-25",
-      skills: ["Quality Control", "Testing", "Documentation"],
-      location: "Dubai",
-      phone: "+971 50 012 3456",
-      email: "maryam.said@company.com",
-      experience: "4 years",
-      certifications: ["Quality Management", "ISO Standards"]
+      lastAssignment: "2023-12-20",
+      skills: ["Bricklaying", "Concrete Work", "Plastering"],
+      experience: "10 years",
+      contactNumber: "+971 50 456 7890",
+      status: "Unavailable"
     }
   ];
 
   const filteredEmployees = standbyEmployees.filter(employee => 
-    employee.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    employee.employeeName.toLowerCase().includes(searchTerm.toLowerCase()) ||
     employee.position.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    employee.skills.some(skill => skill.toLowerCase().includes(searchTerm.toLowerCase()))
+    employee.department.toLowerCase().includes(searchTerm.toLowerCase())
   );
+
+  const getStatusColor = (status: string) => {
+    switch (status) {
+      case "Ready": return "bg-green-500";
+      case "Busy": return "bg-yellow-500";
+      case "Unavailable": return "bg-red-500";
+      default: return "bg-gray-500";
+    }
+  };
 
   const getAvailabilityColor = (availability: string) => {
     switch (availability) {
-      case "Available": return "bg-green-500";
-      case "On Assignment": return "bg-blue-500";
-      case "On Leave": return "bg-yellow-500";
-      case "Unavailable": return "bg-red-500";
-      default: return "bg-gray-500";
+      case "Available": return "text-green-400";
+      case "On Assignment": return "text-yellow-400";
+      case "On Leave": return "text-red-400";
+      default: return "text-gray-400";
     }
   };
 
@@ -115,9 +117,13 @@ const ManpowerStandby = () => {
             </Button>
             <div>
               <h1 className="text-3xl font-bold text-white">Manpower Standby</h1>
-              <p className="text-gray-400">Available staff resources and assignments</p>
+              <p className="text-gray-400">Manage standby workforce and availability</p>
             </div>
           </div>
+          <Button className="bg-gradient-to-r from-cyan-500 to-cyan-700 hover:from-cyan-600 hover:to-cyan-800">
+            <Plus className="w-4 h-4 mr-2" />
+            Add to Standby
+          </Button>
         </div>
 
         {/* Search */}
@@ -125,7 +131,7 @@ const ManpowerStandby = () => {
           <div className="relative max-w-md">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
             <Input
-              placeholder="Search by name, position, or skills..."
+              placeholder="Search standby employees..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-10 bg-gray-800 border-gray-700 text-white"
@@ -142,7 +148,7 @@ const ManpowerStandby = () => {
                   <p className="text-gray-400 text-sm">Total Standby</p>
                   <p className="text-2xl font-bold text-white">{standbyEmployees.length}</p>
                 </div>
-                <Users className="w-8 h-8 text-indigo-400" />
+                <Users className="w-8 h-8 text-cyan-400" />
               </div>
             </CardContent>
           </Card>
@@ -153,10 +159,10 @@ const ManpowerStandby = () => {
                 <div>
                   <p className="text-gray-400 text-sm">Available</p>
                   <p className="text-2xl font-bold text-green-400">
-                    {standbyEmployees.filter(emp => emp.availability === "Available").length}
+                    {standbyEmployees.filter(e => e.availability === "Available").length}
                   </p>
                 </div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
+                <CheckCircle className="w-8 h-8 text-green-400" />
               </div>
             </CardContent>
           </Card>
@@ -166,11 +172,11 @@ const ManpowerStandby = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-400 text-sm">On Assignment</p>
-                  <p className="text-2xl font-bold text-blue-400">
-                    {standbyEmployees.filter(emp => emp.availability === "On Assignment").length}
+                  <p className="text-2xl font-bold text-yellow-400">
+                    {standbyEmployees.filter(e => e.availability === "On Assignment").length}
                   </p>
                 </div>
-                <Briefcase className="w-8 h-8 text-blue-400" />
+                <Clock className="w-8 h-8 text-yellow-400" />
               </div>
             </CardContent>
           </Card>
@@ -180,11 +186,11 @@ const ManpowerStandby = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-gray-400 text-sm">On Leave</p>
-                  <p className="text-2xl font-bold text-yellow-400">
-                    {standbyEmployees.filter(emp => emp.availability === "On Leave").length}
+                  <p className="text-2xl font-bold text-red-400">
+                    {standbyEmployees.filter(e => e.availability === "On Leave").length}
                   </p>
                 </div>
-                <Calendar className="w-8 h-8 text-yellow-400" />
+                <XCircle className="w-8 h-8 text-red-400" />
               </div>
             </CardContent>
           </Card>
@@ -193,18 +199,18 @@ const ManpowerStandby = () => {
         {/* Standby Employees Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {filteredEmployees.map((employee) => (
-            <Card key={employee.id} className="bg-gray-800/50 border-gray-700 hover:border-gray-600 transition-all">
+            <Card key={employee.id} className="bg-gray-800/50 border-gray-700">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
-                    <User className="w-8 h-8 text-indigo-400" />
+                    <User className="w-8 h-8 text-cyan-400" />
                     <div>
-                      <CardTitle className="text-white">{employee.name}</CardTitle>
-                      <p className="text-gray-400 text-sm">{employee.id}</p>
+                      <CardTitle className="text-white">{employee.employeeName}</CardTitle>
+                      <p className="text-gray-400 text-sm">{employee.employeeId}</p>
                     </div>
                   </div>
-                  <Badge className={`${getAvailabilityColor(employee.availability)} text-white border-none`}>
-                    {employee.availability}
+                  <Badge className={`${getStatusColor(employee.status)} text-white border-none`}>
+                    {employee.status}
                   </Badge>
                 </div>
               </CardHeader>
@@ -223,24 +229,12 @@ const ManpowerStandby = () => {
                     <p className="text-white">{employee.experience}</p>
                   </div>
                   <div>
-                    <p className="text-gray-400">Location</p>
-                    <p className="text-white">{employee.location}</p>
+                    <p className="text-gray-400">Availability</p>
+                    <p className={`font-medium ${getAvailabilityColor(employee.availability)}`}>
+                      {employee.availability}
+                    </p>
                   </div>
                 </div>
-
-                {employee.availability === "On Assignment" && employee.assignedTo && (
-                  <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
-                    <p className="text-blue-400 text-sm font-medium">Currently Assigned To:</p>
-                    <p className="text-white">{employee.assignedTo}</p>
-                  </div>
-                )}
-
-                {employee.availability === "On Leave" && employee.leaveUntil && (
-                  <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-lg p-3">
-                    <p className="text-yellow-400 text-sm font-medium">On Leave Until:</p>
-                    <p className="text-white">{employee.leaveUntil}</p>
-                  </div>
-                )}
 
                 <div>
                   <p className="text-gray-400 text-sm mb-2">Skills</p>
@@ -253,35 +247,36 @@ const ManpowerStandby = () => {
                   </div>
                 </div>
 
-                <div>
-                  <p className="text-gray-400 text-sm mb-2">Certifications</p>
-                  <div className="flex flex-wrap gap-1">
-                    {employee.certifications.map((cert, index) => (
-                      <Badge key={index} className="text-xs bg-green-600 text-white">
-                        {cert}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                  <div className="flex items-center space-x-2">
-                    <Phone className="w-4 h-4 text-gray-400" />
-                    <span className="text-gray-300">{employee.phone}</span>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <Mail className="w-4 h-4 text-gray-400" />
-                    <span className="text-gray-300">{employee.email}</span>
+                <div className="bg-gray-700/30 rounded-lg p-3">
+                  <div className="grid grid-cols-2 gap-4 text-sm">
+                    <div>
+                      <p className="text-gray-400">Last Assignment</p>
+                      <p className="text-white">{employee.lastAssignment}</p>
+                    </div>
+                    <div>
+                      <p className="text-gray-400">Contact</p>
+                      <p className="text-white">{employee.contactNumber}</p>
+                    </div>
                   </div>
                 </div>
 
                 <div className="flex space-x-2 pt-2">
-                  <Button size="sm" className="flex-1 bg-indigo-600 hover:bg-indigo-700">
-                    Assign to Project
-                  </Button>
                   <Button size="sm" variant="outline" className="flex-1 text-gray-300 border-gray-600">
+                    <Eye className="w-3 h-3 mr-2" />
                     View Profile
                   </Button>
+                  {employee.availability === "Available" && (
+                    <Button size="sm" className="flex-1 bg-green-600 hover:bg-green-700">
+                      <CheckCircle className="w-3 h-3 mr-2" />
+                      Assign
+                    </Button>
+                  )}
+                  {employee.availability === "On Assignment" && (
+                    <Button size="sm" className="flex-1 bg-yellow-600 hover:bg-yellow-700">
+                      <AlertCircle className="w-3 h-3 mr-2" />
+                      Check Status
+                    </Button>
+                  )}
                 </div>
               </CardContent>
             </Card>
