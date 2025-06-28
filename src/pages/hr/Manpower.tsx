@@ -1,27 +1,12 @@
 import { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { 
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table";
-import { 
-  ArrowLeft, 
-  Search, 
-  Plus, 
-  Users, 
-  Filter,
-  Briefcase,
-  Edit,
-  Trash2
-} from "lucide-react";
+import { ArrowLeft, Plus } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { EmployeeForm } from "@/components/hr/EmployeeForm";
+import { ManpowerStats } from "@/components/hr/ManpowerStats";
+import { ManpowerFilters } from "@/components/hr/ManpowerFilters";
+import { ManpowerActions } from "@/components/hr/ManpowerActions";
+import { ManpowerTable } from "@/components/hr/ManpowerTable";
 import { useToast } from "@/hooks/use-toast";
 
 const Manpower = () => {
@@ -194,15 +179,6 @@ const Manpower = () => {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case "Active": return "text-green-400";
-      case "On Leave": return "text-yellow-400";
-      case "Inactive": return "text-red-400";
-      default: return "text-gray-400";
-    }
-  };
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
       <div className="max-w-7xl mx-auto">
@@ -227,175 +203,30 @@ const Manpower = () => {
             className="bg-gradient-to-r from-blue-500 to-blue-700 hover:from-blue-600 hover:to-blue-800"
           >
             <Plus className="w-4 h-4 mr-2" />
-            Add Employee
+            Add New
           </Button>
         </div>
+
+        {/* Action Buttons */}
+        <ManpowerActions />
 
         {/* Search and Filters */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
-          <div className="md:col-span-2 relative">
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-            <Input
-              placeholder="Search employees..."
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
-              className="pl-10 bg-gray-800 border-gray-700 text-white"
-            />
-          </div>
-          <select
-            value={filterStatus}
-            onChange={(e) => setFilterStatus(e.target.value)}
-            className="px-3 py-2 bg-gray-800 border border-gray-700 rounded-md text-white"
-          >
-            <option value="all">All Status</option>
-            <option value="active">Active</option>
-            <option value="on leave">On Leave</option>
-            <option value="inactive">Inactive</option>
-          </select>
-          <Button variant="outline" className="text-gray-300 border-gray-600">
-            <Filter className="w-4 h-4 mr-2" />
-            More Filters
-          </Button>
-        </div>
+        <ManpowerFilters
+          searchTerm={searchTerm}
+          setSearchTerm={setSearchTerm}
+          filterStatus={filterStatus}
+          setFilterStatus={setFilterStatus}
+        />
 
         {/* Stats Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-gray-800/50 border-gray-700">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">Total Employees</p>
-                  <p className="text-2xl font-bold text-white">{employees.length}</p>
-                </div>
-                <Users className="w-8 h-8 text-blue-400" />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-800/50 border-gray-700">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">Active</p>
-                  <p className="text-2xl font-bold text-green-400">
-                    {employees.filter(emp => emp.status === "Active").length}
-                  </p>
-                </div>
-                <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-800/50 border-gray-700">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">On Leave</p>
-                  <p className="text-2xl font-bold text-yellow-400">
-                    {employees.filter(emp => emp.status === "On Leave").length}
-                  </p>
-                </div>
-                <div className="w-3 h-3 bg-yellow-500 rounded-full"></div>
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-gray-800/50 border-gray-700">
-            <CardContent className="p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-gray-400 text-sm">Departments</p>
-                  <p className="text-2xl font-bold text-purple-400">
-                    {new Set(employees.map(emp => emp.department)).size}
-                  </p>
-                </div>
-                <Briefcase className="w-8 h-8 text-purple-400" />
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <ManpowerStats employees={employees} />
 
         {/* Employee Table */}
-        <Card className="bg-gray-800/50 border-gray-700">
-          <CardContent className="p-0">
-            <div className="overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow className="border-gray-700 hover:bg-gray-700/50">
-                    <TableHead className="text-gray-300 font-semibold">ID</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Name</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Position</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Department</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Email</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Phone</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Location</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Status</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Join Date</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Salary</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Contract</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Nationality</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Passport</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Visa Status</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Work Permit</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Emergency</TableHead>
-                    <TableHead className="text-gray-300 font-semibold">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredEmployees.map((employee) => (
-                    <TableRow key={employee.id} className="border-gray-700 hover:bg-gray-700/30">
-                      <TableCell className="text-blue-400 font-medium">{employee.id}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center space-x-3">
-                          <img 
-                            src={employee.avatar} 
-                            alt={employee.name}
-                            className="w-8 h-8 rounded-full object-cover"
-                          />
-                          <span className="text-white font-medium">{employee.name}</span>
-                        </div>
-                      </TableCell>
-                      <TableCell className="text-gray-300">{employee.position}</TableCell>
-                      <TableCell className="text-gray-300">{employee.department}</TableCell>
-                      <TableCell className="text-gray-300">{employee.email}</TableCell>
-                      <TableCell className="text-gray-300">{employee.phone}</TableCell>
-                      <TableCell className="text-gray-300">{employee.location}</TableCell>
-                      <TableCell className={getStatusColor(employee.status)}>{employee.status}</TableCell>
-                      <TableCell className="text-gray-300">{employee.joinDate}</TableCell>
-                      <TableCell className="text-green-400">AED {employee.salary}</TableCell>
-                      <TableCell className="text-gray-300">{employee.contractType}</TableCell>
-                      <TableCell className="text-gray-300">{employee.nationality}</TableCell>
-                      <TableCell className="text-gray-300">{employee.passportNo}</TableCell>
-                      <TableCell className="text-green-400">{employee.visaStatus}</TableCell>
-                      <TableCell className="text-green-400">{employee.workPermit}</TableCell>
-                      <TableCell className="text-gray-300">{employee.emergencyContact}</TableCell>
-                      <TableCell>
-                        <div className="flex space-x-2">
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleEditEmployee(employee)}
-                            className="text-blue-400 border-blue-400 hover:bg-blue-400/10"
-                          >
-                            <Edit className="w-3 h-3" />
-                          </Button>
-                          <Button
-                            size="sm"
-                            variant="outline"
-                            onClick={() => handleDeleteEmployee(employee.id)}
-                            className="text-red-400 border-red-400 hover:bg-red-400/10"
-                          >
-                            <Trash2 className="w-3 h-3" />
-                          </Button>
-                        </div>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </CardContent>
-        </Card>
+        <ManpowerTable
+          employees={filteredEmployees}
+          onEditEmployee={handleEditEmployee}
+          onDeleteEmployee={handleDeleteEmployee}
+        />
 
         {/* Employee Form Modal */}
         {showEmployeeForm && (
