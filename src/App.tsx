@@ -8,6 +8,10 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Hr from "./pages/Hr";
 import Manpower from "./pages/hr/Manpower";
+import FinalExit from "./pages/hr/FinalExit";
+import Evasion from "./pages/hr/Evasion";
+import Dependent from "./pages/hr/Dependent";
+import EmployeeCost from "./pages/hr/EmployeeCost";
 import Contracts from "./pages/hr/Contracts";
 import StaffInfo from "./pages/hr/StaffInfo";
 import PassportInfo from "./pages/hr/PassportInfo";
@@ -31,6 +35,10 @@ const App = () => (
           <Route path="/" element={<Index />} />
           <Route path="/hr" element={<Hr />} />
           <Route path="/hr/manpower" element={<Manpower />} />
+          <Route path="/hr/final-exit" element={<FinalExit />} />
+          <Route path="/hr/evasion" element={<Evasion />} />
+          <Route path="/hr/dependent" element={<Dependent />} />
+          <Route path="/hr/employee-cost" element={<EmployeeCost />} />
           <Route path="/hr/contracts" element={<Contracts />} />
           <Route path="/hr/staff-info" element={<StaffInfo />} />
           <Route path="/hr/passport-info" element={<PassportInfo />} />
