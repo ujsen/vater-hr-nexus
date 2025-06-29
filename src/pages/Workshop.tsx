@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -10,7 +9,6 @@ import {
   Plus, 
   Wrench, 
   Settings,
-  Tool,
   Zap,
   Cog,
   Calendar,
@@ -100,7 +98,7 @@ const Workshop = () => {
     switch (type) {
       case "Heavy Machinery": return Settings;
       case "Welding Equipment": return Zap;
-      case "Power Tool": return Tool;
+      case "Power Tool": return Wrench;
       case "Pneumatic System": return Cog;
       default: return Wrench;
     }
