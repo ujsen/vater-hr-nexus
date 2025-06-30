@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -5,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
-import { Building2, Mail, Lock, User } from "lucide-react";
+import { Building2, Mail, Lock, User, Play } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/hooks/useAuth";
 
@@ -69,6 +70,16 @@ const Auth = () => {
     }
   };
 
+  const handleDemoLogin = () => {
+    setEmail("demo@erp.com");
+    setPassword("demo123456");
+    setIsLogin(true);
+    toast({
+      title: "Demo credentials loaded",
+      description: "Click 'Sign In' to login with demo account",
+    });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex flex-col items-center justify-center p-6">
       <Card className="w-full max-w-md bg-gray-800/50 border-gray-700">
@@ -84,6 +95,24 @@ const Auth = () => {
           </p>
         </CardHeader>
         <CardContent>
+          {/* Demo Login Section */}
+          <div className="mb-6 p-4 bg-gray-700/30 rounded-lg border border-gray-600">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="text-sm font-medium text-gray-300">Demo Login</h3>
+              <Play className="w-4 h-4 text-orange-400" />
+            </div>
+            <p className="text-xs text-gray-400 mb-3">
+              Try the system with demo credentials
+            </p>
+            <Button
+              onClick={handleDemoLogin}
+              variant="outline"
+              className="w-full text-orange-400 border-orange-400 hover:bg-orange-400 hover:text-gray-900"
+            >
+              Load Demo Credentials
+            </Button>
+          </div>
+
           <form onSubmit={handleAuth} className="space-y-4">
             {!isLogin && (
               <div className="space-y-2">
