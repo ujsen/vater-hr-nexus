@@ -26,6 +26,10 @@ import Documents from "./pages/hr/Documents";
 import DrivingLicense from "./pages/hr/DrivingLicense";
 import AdvanceVoucher from "./pages/hr/AdvanceVoucher";
 import Workshop from "./pages/Workshop";
+import Reports from "./pages/Reports";
+import Logistics from "./pages/Logistics";
+import Tasks from "./pages/Tasks";
+import Sales from "./pages/Sales";
 
 const queryClient = new QueryClient();
 
@@ -126,6 +130,26 @@ const App = () => (
             <Route path="/workshop" element={
               <ProtectedRoute>
                 <Workshop />
+              </ProtectedRoute>
+            } />
+            <Route path="/reports" element={
+              <ProtectedRoute>
+                <Reports />
+              </ProtectedRoute>
+            } />
+            <Route path="/logistics" element={
+              <ProtectedRoute>
+                <Logistics />
+              </ProtectedRoute>
+            } />
+            <Route path="/tasks" element={
+              <ProtectedRoute>
+                <Tasks />
+              </ProtectedRoute>
+            } />
+            <Route path="/sales" element={
+              <ProtectedRoute>
+                <Sales />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />

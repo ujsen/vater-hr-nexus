@@ -17,7 +17,14 @@ import {
   Calculator,
   Wrench,
   LogOut,
-  User
+  User,
+  Truck,
+  Building2,
+  TrendingUp,
+  History,
+  ShoppingBag,
+  PieChart,
+  Banknote
 } from "lucide-react";
 
 const Index = () => {
@@ -25,76 +32,119 @@ const Index = () => {
 
   const modules = [
     {
-      id: 'store',
-      title: 'Store System',
-      icon: Store,
-      color: 'from-purple-500 to-purple-700',
-      description: 'Inventory & Sales Management',
-      path: '/store'
-    },
-    {
-      id: 'payroll',
-      title: 'Payroll System',
-      icon: Calculator,
+      id: 'logistics',
+      title: 'Logistic Service',
+      icon: Truck,
       color: 'from-blue-500 to-blue-700',
-      description: 'Employee Payments & Benefits',
-      path: '/payroll'
+      description: 'Transportation & Logistics',
+      path: '/logistics'
     },
     {
       id: 'hr',
-      title: 'Human Resource',
+      title: 'HR Department',
       icon: UserCheck,
-      color: 'from-green-500 to-green-700',
-      description: 'Employee Management',
+      color: 'from-purple-500 to-purple-700',
+      description: 'Human Resource Management',
       path: '/hr'
     },
     {
-      id: 'accounting',
-      title: 'Accounting System',
-      icon: BarChart3,
-      color: 'from-orange-500 to-orange-700',
-      description: 'Financial Management',
-      path: '/accounting'
-    },
-    {
       id: 'projects',
-      title: 'Projects Management',
+      title: 'Project Management',
       icon: Briefcase,
-      color: 'from-pink-500 to-pink-700',
+      color: 'from-orange-500 to-orange-700',
       description: 'Project Planning & Tracking',
       path: '/projects'
     },
     {
-      id: 'pos',
-      title: 'Point Of Sales',
-      icon: ShoppingCart,
-      color: 'from-indigo-500 to-indigo-700',
-      description: 'Sales & Customer Management',
-      path: '/pos'
+      id: 'tasks',
+      title: 'Task Manager',
+      icon: Clock,
+      color: 'from-teal-500 to-teal-700',
+      description: 'Task Assignment & Tracking',
+      path: '/tasks'
     },
     {
       id: 'purchase',
-      title: 'Purchase System',
-      icon: FileText,
-      color: 'from-teal-500 to-teal-700',
-      description: 'Procurement & Vendors',
+      title: 'Purchases Department',
+      icon: ShoppingBag,
+      color: 'from-green-500 to-green-700',
+      description: 'Procurement & Purchasing',
       path: '/purchase'
     },
     {
-      id: 'workshop',
-      title: 'Work Shop',
-      icon: Wrench,
-      color: 'from-red-500 to-red-700',
-      description: 'Manufacturing & Production',
-      path: '/workshop'
+      id: 'store',
+      title: 'Store Department',
+      icon: Store,
+      color: 'from-indigo-500 to-indigo-700',
+      description: 'Inventory Management',
+      path: '/store'
     },
     {
-      id: 'security',
-      title: 'Users Security System',
+      id: 'sales',
+      title: 'Sales Department',
+      icon: TrendingUp,
+      color: 'from-red-500 to-red-700',
+      description: 'Sales & Customer Management',
+      path: '/sales'
+    },
+    {
+      id: 'reports',
+      title: 'Report',
+      icon: BarChart3,
+      color: 'from-yellow-500 to-yellow-700',
+      description: 'Analytics & Reporting',
+      path: '/reports'
+    }
+  ];
+
+  const reportModules = [
+    {
+      id: 'platform-info',
+      title: 'Platform Information',
       icon: Shield,
-      color: 'from-gray-600 to-gray-800',
-      description: 'Access Control & Permissions',
-      path: '/security'
+      color: 'from-cyan-500 to-cyan-700',
+      description: 'System Information',
+      path: '/reports/platform-info'
+    },
+    {
+      id: 'advance-voucher',
+      title: 'Advance Voucher',
+      icon: Banknote,
+      color: 'from-emerald-500 to-emerald-700',
+      description: 'Employee Advances',
+      path: '/reports/advance-voucher'
+    },
+    {
+      id: 'summary-report',
+      title: 'Summary Report',
+      icon: PieChart,
+      color: 'from-violet-500 to-violet-700',
+      description: 'Executive Summary',
+      path: '/reports/summary'
+    },
+    {
+      id: 'employee-history',
+      title: 'Employee History',
+      icon: History,
+      color: 'from-blue-600 to-blue-800',
+      description: 'Staff Activity Records',
+      path: '/reports/employee-history'
+    },
+    {
+      id: 'depreciation-report',
+      title: 'Depreciation Report',
+      icon: TrendingUp,
+      color: 'from-red-600 to-red-800',
+      description: 'Asset Depreciation',
+      path: '/reports/depreciation'
+    },
+    {
+      id: 'daily-report',
+      title: 'Daily Report',
+      icon: FileText,
+      color: 'from-gray-500 to-gray-700',
+      description: 'Daily Operations Summary',
+      path: '/reports/daily'
     }
   ];
 
@@ -130,29 +180,60 @@ const Index = () => {
           </div>
         </div>
 
-        {/* Modules Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {modules.map((module) => {
-            const IconComponent = module.icon;
-            return (
-              <Link key={module.id} to={module.path}>
-                <Card className="group relative overflow-hidden bg-gray-800/50 border-gray-700 hover:border-gray-600 transition-all duration-300 hover:scale-105 cursor-pointer backdrop-blur-sm">
-                  <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`} />
-                  <CardContent className="relative p-8 text-center">
-                    <div className={`w-20 h-20 mx-auto mb-6 rounded-full bg-gradient-to-br ${module.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
-                      <IconComponent className="w-10 h-10 text-white" />
-                    </div>
-                    <h3 className="text-xl font-semibold text-white mb-2 group-hover:text-gray-100 transition-colors">
-                      {module.title}
-                    </h3>
-                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">
-                      {module.description}
-                    </p>
-                  </CardContent>
-                </Card>
-              </Link>
-            );
-          })}
+        {/* Main Modules Grid */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold text-white mb-8 text-center">Main Modules</h2>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {modules.map((module) => {
+              const IconComponent = module.icon;
+              return (
+                <Link key={module.id} to={module.path}>
+                  <Card className="group relative overflow-hidden bg-gray-800/50 border-gray-700 hover:border-gray-600 transition-all duration-300 hover:scale-105 cursor-pointer backdrop-blur-sm">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`} />
+                    <CardContent className="relative p-6 text-center">
+                      <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br ${module.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                        <IconComponent className="w-8 h-8 text-white" />
+                      </div>
+                      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-gray-100 transition-colors">
+                        {module.title}
+                      </h3>
+                      <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">
+                        {module.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Reports Section */}
+        <div className="mb-16">
+          <h2 className="text-2xl font-bold text-white mb-8 text-center">Reports & Analytics</h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
+            {reportModules.map((module) => {
+              const IconComponent = module.icon;
+              return (
+                <Link key={module.id} to={module.path}>
+                  <Card className="group relative overflow-hidden bg-gray-800/50 border-gray-700 hover:border-gray-600 transition-all duration-300 hover:scale-105 cursor-pointer backdrop-blur-sm">
+                    <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`} />
+                    <CardContent className="relative p-5 text-center">
+                      <div className={`w-12 h-12 mx-auto mb-3 rounded-full bg-gradient-to-br ${module.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                      <h3 className="text-md font-semibold text-white mb-1 group-hover:text-gray-100 transition-colors">
+                        {module.title}
+                      </h3>
+                      <p className="text-gray-400 text-xs group-hover:text-gray-300 transition-colors">
+                        {module.description}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              );
+            })}
+          </div>
         </div>
 
         {/* Quick Stats Footer */}
@@ -170,17 +251,7 @@ const Index = () => {
           <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">User Role</p>
-                <p className="text-2xl font-bold text-white">Employee</p>
-              </div>
-              <UserCheck className="w-8 h-8 text-green-400" />
-            </div>
-          </div>
-          
-          <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
-            <div className="flex items-center justify-between">
-              <div>
-                <p className="text-gray-400 text-sm">Modules</p>
+                <p className="text-gray-400 text-sm">Active Modules</p>
                 <p className="text-2xl font-bold text-white">{modules.length}</p>
               </div>
               <Briefcase className="w-8 h-8 text-purple-400" />
@@ -190,10 +261,20 @@ const Index = () => {
           <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
             <div className="flex items-center justify-between">
               <div>
+                <p className="text-gray-400 text-sm">Reports Available</p>
+                <p className="text-2xl font-bold text-white">{reportModules.length}</p>
+              </div>
+              <BarChart3 className="w-8 h-8 text-orange-400" />
+            </div>
+          </div>
+          
+          <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+            <div className="flex items-center justify-between">
+              <div>
                 <p className="text-gray-400 text-sm">Last Login</p>
                 <p className="text-2xl font-bold text-white">Now</p>
               </div>
-              <Clock className="w-8 h-8 text-orange-400" />
+              <Clock className="w-8 h-8 text-green-400" />
             </div>
           </div>
         </div>
