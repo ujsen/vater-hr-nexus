@@ -30,6 +30,9 @@ import Reports from "./pages/Reports";
 import Logistics from "./pages/Logistics";
 import Tasks from "./pages/Tasks";
 import Sales from "./pages/Sales";
+import Projects from "./pages/Projects";
+import Purchase from "./pages/Purchase";
+import Store from "./pages/Store";
 
 const queryClient = new QueryClient();
 
@@ -150,6 +153,21 @@ const App = () => (
             <Route path="/sales" element={
               <ProtectedRoute>
                 <Sales />
+              </ProtectedRoute>
+            } />
+            <Route path="/projects" element={
+              <ProtectedRoute>
+                <Projects />
+              </ProtectedRoute>
+            } />
+            <Route path="/purchase" element={
+              <ProtectedRoute>
+                <Purchase />
+              </ProtectedRoute>
+            } />
+            <Route path="/store" element={
+              <ProtectedRoute>
+                <Store />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />

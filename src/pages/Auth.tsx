@@ -8,6 +8,7 @@ import { supabase } from "@/integrations/supabase/client";
 import { useNavigate } from "react-router-dom";
 import { Building2, Mail, Lock, User } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/hooks/useAuth";
 
 const Auth = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -17,16 +18,13 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user } = useAuth();
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((event, session) => {
-      if (session) {
-        navigate("/");
-      }
-    });
-
-    return () => subscription.unsubscribe();
-  }, [navigate]);
+    if (user) {
+      navigate("/");
+    }
+  }, [user, navigate]);
 
   const handleAuth = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -43,6 +41,7 @@ const Auth = () => {
           title: "Login successful",
           description: "Welcome back to the ERP system!",
         });
+        navigate("/");
       } else {
         const { error } = await supabase.auth.signUp({
           email,
@@ -56,7 +55,7 @@ const Auth = () => {
         });
         if (error) throw error;
         toast({
-          title: "Registration successful",
+          title: "Registration successful", 
           description: "Please check your email to verify your account.",
         });
       }
