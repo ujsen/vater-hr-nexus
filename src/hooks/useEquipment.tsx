@@ -2,6 +2,10 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Database } from "@/integrations/supabase/types";
+
+type EquipmentInsert = Database["public"]["Tables"]["equipment"]["Insert"];
+type EquipmentUpdate = Database["public"]["Tables"]["equipment"]["Update"];
 
 export interface Equipment {
   id: string;
@@ -41,11 +45,11 @@ export const useEquipment = () => {
     }
   };
 
-  const addEquipment = async (equipmentData: Partial<Equipment>) => {
+  const addEquipment = async (equipmentData: EquipmentInsert) => {
     try {
       const { data, error } = await supabase
         .from("equipment")
-        .insert([equipmentData])
+        .insert(equipmentData)
         .select()
         .single();
 
@@ -66,7 +70,7 @@ export const useEquipment = () => {
     }
   };
 
-  const updateEquipment = async (id: string, equipmentData: Partial<Equipment>) => {
+  const updateEquipment = async (id: string, equipmentData: EquipmentUpdate) => {
     try {
       const { data, error } = await supabase
         .from("equipment")

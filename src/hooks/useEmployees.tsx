@@ -2,6 +2,10 @@
 import { useState, useEffect } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Database } from "@/integrations/supabase/types";
+
+type EmployeeInsert = Database["public"]["Tables"]["employees"]["Insert"];
+type EmployeeUpdate = Database["public"]["Tables"]["employees"]["Update"];
 
 export interface Employee {
   id: string;
@@ -11,7 +15,7 @@ export interface Employee {
   position: string;
   manager_id?: string;
   salary?: number;
-  status: string;
+  status: "active" | "inactive" | "terminated";
   hire_date: string;
   created_at: string;
   updated_at: string;
@@ -42,11 +46,11 @@ export const useEmployees = () => {
     }
   };
 
-  const addEmployee = async (employeeData: Partial<Employee>) => {
+  const addEmployee = async (employeeData: EmployeeInsert) => {
     try {
       const { data, error } = await supabase
         .from("employees")
-        .insert([employeeData])
+        .insert(employeeData)
         .select()
         .single();
 
@@ -67,7 +71,7 @@ export const useEmployees = () => {
     }
   };
 
-  const updateEmployee = async (id: string, employeeData: Partial<Employee>) => {
+  const updateEmployee = async (id: string, employeeData: EmployeeUpdate) => {
     try {
       const { data, error } = await supabase
         .from("employees")
