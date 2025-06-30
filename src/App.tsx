@@ -4,7 +4,10 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./hooks/useAuth";
+import { ProtectedRoute } from "./components/ProtectedRoute";
 import Index from "./pages/Index";
+import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import Hr from "./pages/Hr";
 import Manpower from "./pages/hr/Manpower";
@@ -31,30 +34,104 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/hr" element={<Hr />} />
-          <Route path="/hr/manpower" element={<Manpower />} />
-          <Route path="/hr/final-exit" element={<FinalExit />} />
-          <Route path="/hr/evasion" element={<Evasion />} />
-          <Route path="/hr/dependent" element={<Dependent />} />
-          <Route path="/hr/employee-cost" element={<EmployeeCost />} />
-          <Route path="/hr/contracts" element={<Contracts />} />
-          <Route path="/hr/staff-info" element={<StaffInfo />} />
-          <Route path="/hr/passport-info" element={<PassportInfo />} />
-          <Route path="/hr/employee-requests" element={<EmployeeRequests />} />
-          <Route path="/hr/accidents" element={<Accidents />} />
-          <Route path="/hr/work-permit" element={<WorkPermit />} />
-          <Route path="/hr/manpower-standby" element={<ManpowerStandby />} />
-          <Route path="/hr/documents" element={<Documents />} />
-          <Route path="/hr/driving-license" element={<DrivingLicense />} />
-          <Route path="/hr/advance-voucher" element={<AdvanceVoucher />} />
-          <Route path="/workshop" element={<Workshop />} />
-          {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-          <Route path="*" element={<NotFound />} />
-        </Routes>
-      </BrowserRouter>
+      <AuthProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/auth" element={<Auth />} />
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Index />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr" element={
+              <ProtectedRoute>
+                <Hr />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/manpower" element={
+              <ProtectedRoute>
+                <Manpower />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/final-exit" element={
+              <ProtectedRoute>
+                <FinalExit />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/evasion" element={
+              <ProtectedRoute>
+                <Evasion />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/dependent" element={
+              <ProtectedRoute>
+                <Dependent />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/employee-cost" element={
+              <ProtectedRoute>
+                <EmployeeCost />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/contracts" element={
+              <ProtectedRoute>
+                <Contracts />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/staff-info" element={
+              <ProtectedRoute>
+                <StaffInfo />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/passport-info" element={
+              <ProtectedRoute>
+                <PassportInfo />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/employee-requests" element={
+              <ProtectedRoute>
+                <EmployeeRequests />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/accidents" element={
+              <ProtectedRoute>
+                <Accidents />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/work-permit" element={
+              <ProtectedRoute>
+                <WorkPermit />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/manpower-standby" element={
+              <ProtectedRoute>
+                <ManpowerStandby />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/documents" element={
+              <ProtectedRoute>
+                <Documents />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/driving-license" element={
+              <ProtectedRoute>
+                <DrivingLicense />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/advance-voucher" element={
+              <ProtectedRoute>
+                <AdvanceVoucher />
+              </ProtectedRoute>
+            } />
+            <Route path="/workshop" element={
+              <ProtectedRoute>
+                <Workshop />
+              </ProtectedRoute>
+            } />
+            <Route path="*" element={<NotFound />} />
+          </Routes>
+        </BrowserRouter>
+      </AuthProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
