@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -71,7 +70,7 @@ const Auth = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center p-6">
+    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex flex-col items-center justify-center p-6">
       <Card className="w-full max-w-md bg-gray-800/50 border-gray-700">
         <CardHeader className="text-center">
           <div className="flex items-center justify-center mb-4">
@@ -151,6 +150,15 @@ const Auth = () => {
           </div>
         </CardContent>
       </Card>
+      
+      {/* Credits Footer */}
+      <div className="mt-8 text-center text-gray-400 text-sm">
+        <p className="mb-2">© 2024 ERP Management System</p>
+        <p className="text-xs">
+          Powered by <span className="text-orange-400">Lovable</span> • 
+          Built with <span className="text-orange-400">React</span> & <span className="text-orange-400">Supabase</span>
+        </p>
+      </div>
     </div>
   );
 };
