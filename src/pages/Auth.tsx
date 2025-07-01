@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -97,12 +96,9 @@ const Auth = () => {
           email: demoEmail,
           password: demoPassword,
           options: {
-            emailRedirectTo: `${window.location.origin}/`,
             data: {
               full_name: "Demo User",
             },
-            // Disable email confirmation for demo
-            emailRedirectTo: undefined,
           },
         });
 
