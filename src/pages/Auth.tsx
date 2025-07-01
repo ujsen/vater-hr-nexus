@@ -91,7 +91,7 @@ const Auth = () => {
         return;
       }
 
-      // If sign in failed, create the account
+      // If sign in failed, create the account without email verification
       if (signInError?.message.includes("Invalid login credentials")) {
         const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email: demoEmail,
@@ -101,6 +101,8 @@ const Auth = () => {
             data: {
               full_name: "Demo User",
             },
+            // Disable email confirmation for demo
+            emailRedirectTo: undefined,
           },
         });
 
@@ -108,23 +110,22 @@ const Auth = () => {
           throw signUpError;
         }
 
-        // Check if email confirmation is required
-        if (signUpData?.user && !signUpData?.session) {
-          toast({
-            title: "Demo account created",
-            description: "Demo account needs email confirmation. Please check your email or try manual login.",
-            variant: "destructive",
+        // Demo account created, now try to sign in
+        if (signUpData?.user) {
+          const { data: finalSignInData, error: finalSignInError } = await supabase.auth.signInWithPassword({
+            email: demoEmail,
+            password: demoPassword,
           });
-          setEmail(demoEmail);
-          setPassword(demoPassword);
-          setIsLogin(true);
-        } else if (signUpData?.session) {
-          // Auto-login successful
-          toast({
-            title: "Demo login successful",
-            description: "Welcome to the ERP system demo!",
-          });
-          navigate("/");
+
+          if (finalSignInData?.user && !finalSignInError) {
+            toast({
+              title: "Demo login successful",
+              description: "Welcome to the ERP system demo!",
+            });
+            navigate("/");
+          } else {
+            throw finalSignInError || new Error("Failed to sign in after creation");
+          }
         }
       } else {
         throw signInError;
@@ -132,9 +133,9 @@ const Auth = () => {
     } catch (error: any) {
       console.error("Demo login error:", error);
       toast({
-        title: "Demo setup",
-        description: "Setting up demo credentials for manual login. Please click 'Sign In' after this.",
-        variant: "default",
+        title: "Demo login error",
+        description: "Please try manual login or contact support.",
+        variant: "destructive",
       });
       // Fill the form for manual attempt
       setEmail(demoEmail);
