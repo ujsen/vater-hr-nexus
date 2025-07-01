@@ -70,14 +70,79 @@ const Auth = () => {
     }
   };
 
-  const handleDemoLogin = () => {
-    setEmail("demo@erp.com");
-    setPassword("demo123456");
-    setIsLogin(true);
-    toast({
-      title: "Demo credentials loaded",
-      description: "Click 'Sign In' to login with demo account",
-    });
+  const handleDemoLogin = async () => {
+    setLoading(true);
+    const demoEmail = "demo@erp.com";
+    const demoPassword = "demo123456";
+    
+    try {
+      // First try to sign in
+      const { error: signInError } = await supabase.auth.signInWithPassword({
+        email: demoEmail,
+        password: demoPassword,
+      });
+
+      if (!signInError) {
+        // Success - user exists and login worked
+        toast({
+          title: "Demo login successful",
+          description: "Welcome to the ERP system demo!",
+        });
+        navigate("/");
+        return;
+      }
+
+      // If login failed, try to create the demo user
+      if (signInError.message.includes("Invalid login credentials")) {
+        const { error: signUpError } = await supabase.auth.signUp({
+          email: demoEmail,
+          password: demoPassword,
+          options: {
+            emailRedirectTo: `${window.location.origin}/`,
+            data: {
+              full_name: "Demo User",
+            },
+          },
+        });
+
+        if (signUpError) {
+          if (signUpError.message.includes("already registered")) {
+            // User exists but wrong password or needs verification
+            toast({
+              title: "Demo account setup needed",
+              description: "Please check the demo account email for verification, or contact support.",
+              variant: "destructive",
+            });
+          } else {
+            throw signUpError;
+          }
+        } else {
+          toast({
+            title: "Demo account created",
+            description: "Demo account created successfully. Please check email for verification or try signing in.",
+          });
+          // Fill the form for manual login
+          setEmail(demoEmail);
+          setPassword(demoPassword);
+          setIsLogin(true);
+        }
+      } else {
+        throw signInError;
+      }
+    } catch (error: any) {
+      console.error("Demo login error:", error);
+      toast({
+        title: "Demo login failed",
+        description: error.message || "Please try creating an account manually.",
+        variant: "destructive",
+      });
+      // Fill the form as fallback
+      setEmail(demoEmail);
+      setPassword(demoPassword);
+      setIsLogin(true);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -102,14 +167,15 @@ const Auth = () => {
               <Play className="w-4 h-4 text-orange-400" />
             </div>
             <p className="text-xs text-gray-400 mb-3">
-              Try the system with demo credentials
+              Try the system instantly with demo account
             </p>
             <Button
               onClick={handleDemoLogin}
+              disabled={loading}
               variant="outline"
-              className="w-full text-orange-400 border-orange-400 hover:bg-orange-400 hover:text-gray-900"
+              className="w-full text-orange-400 border-orange-400 hover:bg-orange-400 hover:text-gray-900 disabled:opacity-50"
             >
-              Load Demo Credentials
+              {loading ? "Setting up demo..." : "Quick Demo Login"}
             </Button>
           </div>
 
