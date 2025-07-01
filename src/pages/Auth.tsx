@@ -76,14 +76,13 @@ const Auth = () => {
     const demoPassword = "demo123456";
     
     try {
-      // First try to sign in
-      const { error: signInError } = await supabase.auth.signInWithPassword({
+      // Try to sign in first
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
         email: demoEmail,
         password: demoPassword,
       });
 
-      if (!signInError) {
-        // Success - user exists and login worked
+      if (signInData?.user && !signInError) {
         toast({
           title: "Demo login successful",
           description: "Welcome to the ERP system demo!",
@@ -92,9 +91,9 @@ const Auth = () => {
         return;
       }
 
-      // If login failed, try to create the demo user
-      if (signInError.message.includes("Invalid login credentials")) {
-        const { error: signUpError } = await supabase.auth.signUp({
+      // If sign in failed, create the account
+      if (signInError?.message.includes("Invalid login credentials")) {
+        const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email: demoEmail,
           password: demoPassword,
           options: {
@@ -106,25 +105,26 @@ const Auth = () => {
         });
 
         if (signUpError) {
-          if (signUpError.message.includes("already registered")) {
-            // User exists but wrong password or needs verification
-            toast({
-              title: "Demo account setup needed",
-              description: "Please check the demo account email for verification, or contact support.",
-              variant: "destructive",
-            });
-          } else {
-            throw signUpError;
-          }
-        } else {
+          throw signUpError;
+        }
+
+        // Check if email confirmation is required
+        if (signUpData?.user && !signUpData?.session) {
           toast({
             title: "Demo account created",
-            description: "Demo account created successfully. Please check email for verification or try signing in.",
+            description: "Demo account needs email confirmation. Please check your email or try manual login.",
+            variant: "destructive",
           });
-          // Fill the form for manual login
           setEmail(demoEmail);
           setPassword(demoPassword);
           setIsLogin(true);
+        } else if (signUpData?.session) {
+          // Auto-login successful
+          toast({
+            title: "Demo login successful",
+            description: "Welcome to the ERP system demo!",
+          });
+          navigate("/");
         }
       } else {
         throw signInError;
@@ -132,11 +132,11 @@ const Auth = () => {
     } catch (error: any) {
       console.error("Demo login error:", error);
       toast({
-        title: "Demo login failed",
-        description: error.message || "Please try creating an account manually.",
-        variant: "destructive",
+        title: "Demo setup",
+        description: "Setting up demo credentials for manual login. Please click 'Sign In' after this.",
+        variant: "default",
       });
-      // Fill the form as fallback
+      // Fill the form for manual attempt
       setEmail(demoEmail);
       setPassword(demoPassword);
       setIsLogin(true);
