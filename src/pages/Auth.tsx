@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -46,7 +47,6 @@ const Auth = () => {
           email,
           password,
           options: {
-            emailRedirectTo: `${window.location.origin}/`,
             data: {
               full_name: fullName,
             },
@@ -55,8 +55,16 @@ const Auth = () => {
         if (error) throw error;
         toast({
           title: "Registration successful", 
-          description: "Please check your email to verify your account.",
+          description: "Your account has been created successfully!",
         });
+        // Automatically try to sign in after signup
+        const { error: signInError } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+        if (!signInError) {
+          navigate("/");
+        }
       }
     } catch (error: any) {
       toast({
@@ -90,7 +98,7 @@ const Auth = () => {
         return;
       }
 
-      // If sign in failed, create the account without email verification
+      // If sign in failed, create the account
       if (signInError?.message.includes("Invalid login credentials")) {
         const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
           email: demoEmail,
