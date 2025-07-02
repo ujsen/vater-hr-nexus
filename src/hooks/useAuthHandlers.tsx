@@ -37,6 +37,7 @@ export const useAuthHandlers = () => {
             data: {
               full_name: fullName,
             },
+            emailRedirectTo: undefined,
           },
         });
         if (error) throw error;
@@ -94,6 +95,7 @@ export const useAuthHandlers = () => {
             data: {
               full_name: "Demo User",
             },
+            emailRedirectTo: undefined,
           },
         });
 
