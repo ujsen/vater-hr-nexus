@@ -22,8 +22,7 @@ export const Header = () => {
         </div>
         <Button
           onClick={handleSignOut}
-          variant="outline"
-          className="text-gray-300 border-gray-600 hover:bg-gray-700"
+          variant="destructive"
         >
           <LogOut className="w-4 h-4 mr-2" />
           Sign Out
