@@ -33,6 +33,7 @@ import Sales from "./pages/Sales";
 import Projects from "./pages/Projects";
 import Purchase from "./pages/Purchase";
 import Store from "./pages/Store";
+import PlatformInfo from "./pages/reports/PlatformInfo";
 
 const queryClient = new QueryClient();
 
@@ -168,6 +169,11 @@ const App = () => (
             <Route path="/store" element={
               <ProtectedRoute>
                 <Store />
+              </ProtectedRoute>
+            } />
+            <Route path="/reports/platform-info" element={
+              <ProtectedRoute>
+                <PlatformInfo />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
