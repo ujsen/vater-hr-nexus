@@ -37,20 +37,36 @@
     --radius: 0.5rem;
 
     --sidebar-background: 0 0% 98%;
-
     --sidebar-foreground: 240 5.3% 26.1%;
-
     --sidebar-primary: 240 5.9% 10%;
-
     --sidebar-primary-foreground: 0 0% 98%;
-
     --sidebar-accent: 240 4.8% 95.9%;
-
     --sidebar-accent-foreground: 240 5.9% 10%;
-
     --sidebar-border: 220 13% 91%;
-
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* App-specific color palette */
+    --app-background: 0 0% 100%;
+    --app-surface: 0 0% 98%;
+    --app-surface-secondary: 210 40% 96.1%;
+    --app-text-primary: 222.2 84% 4.9%;
+    --app-text-secondary: 215.4 16.3% 46.9%;
+    --app-text-muted: 215.4 16.3% 65%;
+    
+    /* Brand colors */
+    --app-blue: 221 83% 53%;
+    --app-blue-light: 221 83% 60%;
+    --app-teal: 180 83% 32%;
+    --app-teal-light: 180 83% 40%;
+    --app-orange: 25 95% 53%;
+    --app-orange-light: 25 95% 60%;
+    --app-green: 142 76% 36%;
+    --app-green-light: 142 76% 45%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 53%), hsl(180 83% 32%));
+    --gradient-secondary: linear-gradient(135deg, hsl(25 95% 53%), hsl(142 76% 36%));
+    --gradient-bg: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
   }
 
   .dark {
@@ -89,6 +105,29 @@
     --sidebar-accent-foreground: 240 4.8% 95.9%;
     --sidebar-border: 240 3.7% 15.9%;
     --sidebar-ring: 217.2 91.2% 59.8%;
+
+    /* App-specific dark theme colors */
+    --app-background: 222.2 84% 4.9%;
+    --app-surface: 217.2 32.6% 17.5%;
+    --app-surface-secondary: 215 25% 12%;
+    --app-text-primary: 210 40% 98%;
+    --app-text-secondary: 215 20.2% 65.1%;
+    --app-text-muted: 215 15% 50%;
+    
+    /* Brand colors for dark mode */
+    --app-blue: 221 83% 60%;
+    --app-blue-light: 221 83% 70%;
+    --app-teal: 180 83% 40%;
+    --app-teal-light: 180 83% 50%;
+    --app-orange: 25 95% 60%;
+    --app-orange-light: 25 95% 70%;
+    --app-green: 142 76% 45%;
+    --app-green-light: 142 76% 55%;
+    
+    /* Dark gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(221 83% 60%), hsl(180 83% 40%));
+    --gradient-secondary: linear-gradient(135deg, hsl(25 95% 60%), hsl(142 76% 45%));
+    --gradient-bg: linear-gradient(135deg, hsl(222.2 84% 4.9%) 0%, hsl(215 25% 8%) 100%);
   }
 }
 

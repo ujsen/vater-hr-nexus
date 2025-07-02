@@ -12,8 +12,8 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black flex items-center justify-center">
-        <div className="text-white">Loading...</div>
+      <div className="min-h-screen bg-gradient-app flex items-center justify-center">
+        <div className="text-foreground">Loading...</div>
       </div>
     );
   }
@@ -23,7 +23,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black">
+    <div className="min-h-screen bg-gradient-app">
       <Header />
       {children}
     </div>

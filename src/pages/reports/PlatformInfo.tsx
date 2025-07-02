@@ -99,7 +99,7 @@ const PlatformInfo = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
+    <div className="min-h-screen bg-gradient-app p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-8">
@@ -107,13 +107,13 @@ const PlatformInfo = () => {
             <Button 
               variant="outline" 
               onClick={() => navigate('/reports')}
-              className="text-gray-300 border-gray-600 hover:bg-gray-700"
+              className="border-border hover:bg-accent"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back
             </Button>
             <div>
-              <h1 className="text-4xl font-extrabold text-white">
+              <h1 className="text-4xl font-extrabold text-foreground">
                 Platform Information
               </h1>
             </div>
@@ -121,81 +121,81 @@ const PlatformInfo = () => {
           <div className="flex gap-3">
             <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
               <DialogTrigger asChild>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <Button className="bg-app-blue hover:bg-app-blue-light">
                   <Plus className="w-4 h-4 mr-2" />
                   New Platform
                 </Button>
               </DialogTrigger>
-              <DialogContent className="max-w-4xl bg-gray-800 border-gray-700">
+              <DialogContent className="max-w-4xl bg-popover border-border">
                 <DialogHeader>
-                  <DialogTitle className="text-white">Platform Information</DialogTitle>
+                  <DialogTitle className="text-popover-foreground">Platform Information</DialogTitle>
                 </DialogHeader>
                 <div className="grid grid-cols-2 gap-4 py-4">
                   <div className="space-y-2">
-                    <Label htmlFor="platform-id" className="text-gray-300">Platform # *</Label>
-                    <Input id="platform-id" placeholder="40" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="platform-id" className="text-popover-foreground">Platform # *</Label>
+                    <Input id="platform-id" placeholder="40" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="client-name" className="text-gray-300">Client Name *</Label>
-                    <Input id="client-name" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="client-name" className="text-popover-foreground">Client Name *</Label>
+                    <Input id="client-name" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="code" className="text-gray-300">CODE *</Label>
-                    <Input id="code" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="code" className="text-popover-foreground">CODE *</Label>
+                    <Input id="code" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="vendor-number" className="text-gray-300">Vendor # *</Label>
-                    <Input id="vendor-number" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="vendor-number" className="text-popover-foreground">Vendor # *</Label>
+                    <Input id="vendor-number" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="link" className="text-gray-300">Link *</Label>
-                    <Input id="link" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="link" className="text-popover-foreground">Link *</Label>
+                    <Input id="link" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="platform-type" className="text-gray-300">Platform Type *</Label>
-                    <Input id="platform-type" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="platform-type" className="text-popover-foreground">Platform Type *</Label>
+                    <Input id="platform-type" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="user-name" className="text-gray-300">User Name *</Label>
-                    <Input id="user-name" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="user-name" className="text-popover-foreground">User Name *</Label>
+                    <Input id="user-name" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="password" className="text-gray-300">Password *</Label>
-                    <Input id="password" type="password" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="password" className="text-popover-foreground">Password *</Label>
+                    <Input id="password" type="password" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="registered-email1" className="text-gray-300">Registered Email-1 *</Label>
-                    <Input id="registered-email1" type="email" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="registered-email1" className="text-popover-foreground">Registered Email-1 *</Label>
+                    <Input id="registered-email1" type="email" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="registered-email2" className="text-gray-300">Registered Email-2 *</Label>
-                    <Input id="registered-email2" type="email" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="registered-email2" className="text-popover-foreground">Registered Email-2 *</Label>
+                    <Input id="registered-email2" type="email" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="registered-mobile" className="text-gray-300">Registered Mobile *</Label>
-                    <Input id="registered-mobile" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="registered-mobile" className="text-popover-foreground">Registered Mobile *</Label>
+                    <Input id="registered-mobile" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="authorized-employee" className="text-gray-300">Authorized Employee *</Label>
-                    <Input id="authorized-employee" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="authorized-employee" className="text-popover-foreground">Authorized Employee *</Label>
+                    <Input id="authorized-employee" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="attach-document" className="text-gray-300">Attach document *</Label>
-                    <Input id="attach-document" type="file" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="attach-document" className="text-popover-foreground">Attach document *</Label>
+                    <Input id="attach-document" type="file" className="bg-input border-border text-foreground" />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="expiry-date" className="text-gray-300">Expiry Date *</Label>
-                    <Input id="expiry-date" type="date" placeholder="mm/dd/yyyy" className="bg-gray-700 border-gray-600 text-white" />
+                    <Label htmlFor="expiry-date" className="text-popover-foreground">Expiry Date *</Label>
+                    <Input id="expiry-date" type="date" placeholder="mm/dd/yyyy" className="bg-input border-border text-foreground" />
                   </div>
                 </div>
                 <div className="flex justify-center pt-4">
-                  <Button className="bg-gray-600 hover:bg-gray-700 text-white px-8">
+                  <Button className="bg-muted hover:bg-muted/80 text-muted-foreground px-8">
                     Save
                   </Button>
                 </div>
               </DialogContent>
             </Dialog>
-            <Button variant="outline" className="text-gray-300 border-gray-600 hover:bg-gray-700">
+            <Button variant="outline" className="border-border hover:bg-accent">
               <FileSpreadsheet className="w-4 h-4 mr-2" />
               Export to Excel
             </Button>
@@ -203,12 +203,12 @@ const PlatformInfo = () => {
         </div>
 
         {/* Platform Information Table */}
-        <Card className="bg-white border-gray-300">
+        <Card className="bg-card border-border">
           <CardContent className="p-0">
             <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
-                  <TableRow className="bg-teal-600 border-teal-600">
+                  <TableRow className="bg-app-teal border-app-teal">
                     <TableHead className="text-white font-semibold text-center">SL#</TableHead>
                     <TableHead className="text-white font-semibold text-center">Client Name</TableHead>
                     <TableHead className="text-white font-semibold text-center">CODE</TableHead>
@@ -227,30 +227,30 @@ const PlatformInfo = () => {
                 </TableHeader>
                 <TableBody>
                   {platformData.map((platform, index) => (
-                    <TableRow key={platform.sl} className={`border-gray-300 ${index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                      <TableCell className="text-center text-gray-900">{platform.sl}</TableCell>
-                      <TableCell className="text-gray-900">{platform.clientName}</TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.code}</TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.vendorNumber}</TableCell>
+                    <TableRow key={platform.sl} className={`border-border ${index % 2 === 0 ? 'bg-muted/50' : 'bg-card'}`}>
+                      <TableCell className="text-center text-card-foreground">{platform.sl}</TableCell>
+                      <TableCell className="text-card-foreground">{platform.clientName}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.code}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.vendorNumber}</TableCell>
                       <TableCell className="text-center">
                         <a 
                           href={platform.link} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-blue-600 hover:text-blue-800 underline text-sm"
+                          className="text-app-blue hover:text-app-blue-light underline text-sm"
                         >
                           {platform.link.length > 40 ? platform.link.substring(0, 40) + '...' : platform.link}
                         </a>
                       </TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.platformType}</TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.userName}</TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.password}</TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.registeredEmail1}</TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.registeredMobile}</TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.authorizedEmployee}</TableCell>
-                      <TableCell className="text-center text-gray-900">{platform.expiryDate}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.platformType}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.userName}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.password}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.registeredEmail1}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.registeredMobile}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.authorizedEmployee}</TableCell>
+                      <TableCell className="text-center text-card-foreground">{platform.expiryDate}</TableCell>
                       <TableCell className="text-center">
-                        <span className="px-2 py-1 rounded text-xs font-medium bg-green-100 text-green-800">
+                        <span className="px-2 py-1 rounded text-xs font-medium bg-app-green/20 text-app-green border border-app-green/30">
                           {platform.status}
                         </span>
                       </TableCell>
@@ -258,7 +258,7 @@ const PlatformInfo = () => {
                         <Button 
                           variant="outline" 
                           size="sm"
-                          className="bg-orange-500 hover:bg-orange-600 text-white border-orange-500"
+                          className="bg-app-orange hover:bg-app-orange-light text-white border-app-orange"
                         >
                           <Edit className="w-3 h-3 mr-1" />
                           Update
