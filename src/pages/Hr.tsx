@@ -142,7 +142,7 @@ const Hr = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
+    <div className="min-h-screen bg-gradient-app p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
@@ -150,16 +150,15 @@ const Hr = () => {
             <Button 
               variant="outline" 
               onClick={() => navigate('/')}
-              className="text-gray-300 border-gray-600 hover:bg-gray-700"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </Button>
             <div>
-              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-green-400 via-blue-400 to-purple-400">
+              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-primary animate-fade-in">
                 Human Resource Platform
               </h1>
-              <p className="text-gray-300 text-lg mt-2">
+              <p className="text-app-text-secondary text-lg mt-2">
                 Complete HR Management System
               </p>
             </div>
@@ -172,18 +171,18 @@ const Hr = () => {
             const IconComponent = module.icon;
             return (
               <Link key={module.id} to={module.path}>
-                <Card className="group relative overflow-hidden bg-gray-800/50 border-gray-700 hover:border-gray-600 transition-all duration-300 hover:scale-105 cursor-pointer backdrop-blur-sm h-full">
+                <Card className="group relative overflow-hidden bg-card/50 border-border hover:border-muted-foreground transition-all duration-300 hover:scale-105 cursor-pointer backdrop-blur-sm h-full animate-scale-in">
                   <div className={`absolute inset-0 bg-gradient-to-br ${module.color} opacity-10 group-hover:opacity-20 transition-opacity duration-300`} />
                   <CardContent className="relative p-6 text-center h-full flex flex-col justify-between">
                     <div>
                       <div className={`w-16 h-16 mx-auto mb-4 rounded-full bg-gradient-to-br ${module.color} flex items-center justify-center shadow-lg group-hover:shadow-xl transition-shadow duration-300`}>
                         <IconComponent className="w-8 h-8 text-white" />
                       </div>
-                      <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-gray-100 transition-colors">
+                      <h3 className="text-lg font-semibold text-card-foreground mb-2 group-hover:text-foreground transition-colors">
                         {module.title}
                       </h3>
                     </div>
-                    <p className="text-gray-400 text-sm group-hover:text-gray-300 transition-colors">
+                    <p className="text-muted-foreground text-sm group-hover:text-card-foreground transition-colors">
                       {module.description}
                     </p>
                   </CardContent>
@@ -195,43 +194,43 @@ const Hr = () => {
 
         {/* HR Summary Cards */}
         <div className="mt-12 grid grid-cols-1 md:grid-cols-4 gap-6">
-          <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+          <div className="bg-card/30 backdrop-blur-sm rounded-lg p-6 border border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Total Employees</p>
-                <p className="text-2xl font-bold text-green-400">247</p>
+                <p className="text-muted-foreground text-sm">Total Employees</p>
+                <p className="text-2xl font-bold text-app-green">247</p>
               </div>
-              <Users className="w-8 h-8 text-blue-400" />
+              <Users className="w-8 h-8 text-app-blue" />
             </div>
           </div>
           
-          <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+          <div className="bg-card/30 backdrop-blur-sm rounded-lg p-6 border border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Active Contracts</p>
-                <p className="text-2xl font-bold text-white">189</p>
+                <p className="text-muted-foreground text-sm">Active Contracts</p>
+                <p className="text-2xl font-bold text-foreground">189</p>
               </div>
-              <FileText className="w-8 h-8 text-green-400" />
+              <FileText className="w-8 h-8 text-app-green" />
             </div>
           </div>
           
-          <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+          <div className="bg-card/30 backdrop-blur-sm rounded-lg p-6 border border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Pending Requests</p>
-                <p className="text-2xl font-bold text-white">12</p>
+                <p className="text-muted-foreground text-sm">Pending Requests</p>
+                <p className="text-2xl font-bold text-foreground">12</p>
               </div>
-              <Clock className="w-8 h-8 text-orange-400" />
+              <Clock className="w-8 h-8 text-app-orange" />
             </div>
           </div>
           
-          <div className="bg-gray-800/30 backdrop-blur-sm rounded-lg p-6 border border-gray-700">
+          <div className="bg-card/30 backdrop-blur-sm rounded-lg p-6 border border-border">
             <div className="flex items-center justify-between">
               <div>
-                <p className="text-gray-400 text-sm">Departments</p>
-                <p className="text-2xl font-bold text-white">8</p>
+                <p className="text-muted-foreground text-sm">Departments</p>
+                <p className="text-2xl font-bold text-foreground">8</p>
               </div>
-              <Building className="w-8 h-8 text-purple-400" />
+              <Building className="w-8 h-8 text-app-teal" />
             </div>
           </div>
         </div>

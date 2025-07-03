@@ -61,16 +61,16 @@ const Store = () => {
   ];
 
   const getStockStatus = (current: number, min: number) => {
-    if (current <= min) return { status: 'Low Stock', color: 'text-red-400', bgColor: 'bg-red-600' };
-    if (current <= min * 1.5) return { status: 'Medium', color: 'text-yellow-400', bgColor: 'bg-yellow-600' };
-    return { status: 'Good', color: 'text-green-400', bgColor: 'bg-green-600' };
+    if (current <= min) return { status: 'Low Stock', color: 'text-destructive', bgColor: 'bg-destructive' };
+    if (current <= min * 1.5) return { status: 'Medium', color: 'text-app-orange', bgColor: 'bg-app-orange' };
+    return { status: 'Good', color: 'text-app-green', bgColor: 'bg-app-green' };
   };
 
   const totalValue = inventory.reduce((sum, item) => sum + (item.currentStock * item.unitPrice), 0);
   const lowStockItems = inventory.filter(item => item.currentStock <= item.minLevel).length;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
+    <div className="min-h-screen bg-gradient-app p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
@@ -78,16 +78,15 @@ const Store = () => {
             <Button 
               variant="outline" 
               onClick={() => navigate('/')}
-              className="text-gray-300 border-gray-600 hover:bg-gray-700"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </Button>
             <div>
-              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400">
+              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-primary animate-fade-in">
                 Store Department
               </h1>
-              <p className="text-gray-300 text-lg mt-2">
+              <p className="text-app-text-secondary text-lg mt-2">
                 Inventory Management & Stock Control
               </p>
             </div>
@@ -96,61 +95,61 @@ const Store = () => {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Total Items</p>
-                  <p className="text-2xl font-bold text-white">{inventory.length}</p>
+                  <p className="text-muted-foreground text-sm">Total Items</p>
+                  <p className="text-2xl font-bold text-foreground">{inventory.length}</p>
                 </div>
-                <Package className="w-8 h-8 text-indigo-400" />
+                <Package className="w-8 h-8 text-app-blue" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Low Stock Items</p>
-                  <p className="text-2xl font-bold text-red-400">{lowStockItems}</p>
+                  <p className="text-muted-foreground text-sm">Low Stock Items</p>
+                  <p className="text-2xl font-bold text-destructive">{lowStockItems}</p>
                 </div>
-                <AlertTriangle className="w-8 h-8 text-red-400" />
+                <AlertTriangle className="w-8 h-8 text-destructive" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Total Stock Value</p>
-                  <p className="text-2xl font-bold text-green-400">${totalValue.toLocaleString()}</p>
+                  <p className="text-muted-foreground text-sm">Total Stock Value</p>
+                  <p className="text-2xl font-bold text-app-green">${totalValue.toLocaleString()}</p>
                 </div>
-                <BarChart3 className="w-8 h-8 text-green-400" />
+                <BarChart3 className="w-8 h-8 text-app-green" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Categories</p>
-                  <p className="text-2xl font-bold text-white">
+                  <p className="text-muted-foreground text-sm">Categories</p>
+                  <p className="text-2xl font-bold text-foreground">
                     {new Set(inventory.map(item => item.category)).size}
                   </p>
                 </div>
-                <Boxes className="w-8 h-8 text-purple-400" />
+                <Boxes className="w-8 h-8 text-app-teal" />
               </div>
             </CardContent>
           </Card>
         </div>
 
         {/* Inventory Table */}
-        <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+        <Card className="bg-card/50 border-border backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-white">Inventory Overview</CardTitle>
+            <CardTitle className="text-card-foreground">Inventory Overview</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
@@ -159,46 +158,46 @@ const Store = () => {
                 const stockPercentage = (item.currentStock / item.maxLevel) * 100;
                 
                 return (
-                  <div key={item.id} className="p-4 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-colors">
+                  <div key={item.id} className="p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors">
                     <div className="flex items-center justify-between mb-3">
                       <div>
-                        <h3 className="text-white font-medium">{item.name}</h3>
-                        <p className="text-gray-400 text-sm">{item.id} • {item.category}</p>
+                        <h3 className="text-card-foreground font-medium">{item.name}</h3>
+                        <p className="text-muted-foreground text-sm">{item.id} • {item.category}</p>
                       </div>
                       <div className="flex items-center space-x-3">
                         <span className={`px-2 py-1 rounded text-xs ${stockInfo.bgColor} text-white`}>
                           {stockInfo.status}
                         </span>
-                        <span className="text-white font-medium">${item.unitPrice.toFixed(2)}</span>
+                        <span className="text-card-foreground font-medium">${item.unitPrice.toFixed(2)}</span>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       <div>
                         <div className="flex justify-between text-sm mb-1">
-                          <span className="text-gray-400">Stock Level</span>
-                          <span className="text-white">
+                          <span className="text-muted-foreground">Stock Level</span>
+                          <span className="text-card-foreground">
                             {item.currentStock} / {item.maxLevel} units
                           </span>
                         </div>
-                        <div className="w-full bg-gray-600 rounded-full h-2">
+                        <div className="w-full bg-muted rounded-full h-2">
                           <div 
                             className={`h-2 rounded-full transition-all duration-300 ${
                               stockPercentage <= (item.minLevel / item.maxLevel) * 100 
-                                ? 'bg-red-500' 
+                                ? 'bg-destructive' 
                                 : stockPercentage <= 50 
-                                ? 'bg-yellow-500' 
-                                : 'bg-green-500'
+                                ? 'bg-app-orange' 
+                                : 'bg-app-green'
                             }`}
                             style={{ width: `${Math.min(stockPercentage, 100)}%` }}
                           />
                         </div>
                       </div>
                       <div className="flex justify-between items-center">
-                        <div className="text-sm text-gray-400">
+                        <div className="text-sm text-muted-foreground">
                           Last Updated: {item.lastUpdated}
                         </div>
-                        <div className="text-sm text-white">
+                        <div className="text-sm text-card-foreground">
                           Value: ${(item.currentStock * item.unitPrice).toLocaleString()}
                         </div>
                       </div>
@@ -212,9 +211,9 @@ const Store = () => {
 
         {/* Category Breakdown */}
         <div className="mt-8">
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-white">Stock by Category</CardTitle>
+              <CardTitle className="text-card-foreground">Stock by Category</CardTitle>
             </CardHeader>
             <CardContent>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -223,10 +222,10 @@ const Store = () => {
                   const categoryValue = categoryItems.reduce((sum, item) => sum + (item.currentStock * item.unitPrice), 0);
                   
                   return (
-                    <div key={category} className="p-4 bg-gray-700/30 rounded-lg">
-                      <h4 className="text-white font-medium mb-2">{category}</h4>
-                      <p className="text-gray-400 text-sm">{categoryItems.length} items</p>
-                      <p className="text-green-400 font-bold">${categoryValue.toLocaleString()}</p>
+                    <div key={category} className="p-4 bg-muted/30 rounded-lg">
+                      <h4 className="text-card-foreground font-medium mb-2">{category}</h4>
+                      <p className="text-muted-foreground text-sm">{categoryItems.length} items</p>
+                      <p className="text-app-green font-bold">${categoryValue.toLocaleString()}</p>
                     </div>
                   );
                 })}

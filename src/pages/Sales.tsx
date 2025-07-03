@@ -56,7 +56,7 @@ const Sales = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
+    <div className="min-h-screen bg-gradient-app p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
@@ -64,16 +64,15 @@ const Sales = () => {
             <Button 
               variant="outline" 
               onClick={() => navigate('/')}
-              className="text-gray-300 border-gray-600 hover:bg-gray-700"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </Button>
             <div>
-              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-red-400 via-pink-400 to-purple-400">
+              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-secondary animate-fade-in">
                 Sales Department
               </h1>
-              <p className="text-gray-300 text-lg mt-2">
+              <p className="text-app-text-secondary text-lg mt-2">
                 Sales Management & Customer Relations
               </p>
             </div>
@@ -82,54 +81,54 @@ const Sales = () => {
 
         {/* KPI Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Total Revenue</p>
-                  <p className="text-2xl font-bold text-green-400">$148K</p>
-                  <p className="text-xs text-green-400">+12% from last month</p>
+                  <p className="text-muted-foreground text-sm">Total Revenue</p>
+                  <p className="text-2xl font-bold text-app-green">$148K</p>
+                  <p className="text-xs text-app-green">+12% from last month</p>
                 </div>
-                <DollarSign className="w-8 h-8 text-green-400" />
+                <DollarSign className="w-8 h-8 text-app-green" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Total Orders</p>
-                  <p className="text-2xl font-bold text-blue-400">342</p>
-                  <p className="text-xs text-blue-400">+8% from last month</p>
+                  <p className="text-muted-foreground text-sm">Total Orders</p>
+                  <p className="text-2xl font-bold text-app-blue">342</p>
+                  <p className="text-xs text-app-blue">+8% from last month</p>
                 </div>
-                <ShoppingCart className="w-8 h-8 text-blue-400" />
+                <ShoppingCart className="w-8 h-8 text-app-blue" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Active Customers</p>
-                  <p className="text-2xl font-bold text-purple-400">89</p>
-                  <p className="text-xs text-purple-400">+5% from last month</p>
+                  <p className="text-muted-foreground text-sm">Active Customers</p>
+                  <p className="text-2xl font-bold text-app-teal">89</p>
+                  <p className="text-xs text-app-teal">+5% from last month</p>
                 </div>
-                <Users className="w-8 h-8 text-purple-400" />
+                <Users className="w-8 h-8 text-app-teal" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Conversion Rate</p>
-                  <p className="text-2xl font-bold text-yellow-400">68%</p>
-                  <p className="text-xs text-yellow-400">+3% from last month</p>
+                  <p className="text-muted-foreground text-sm">Conversion Rate</p>
+                  <p className="text-2xl font-bold text-app-orange">68%</p>
+                  <p className="text-xs text-app-orange">+3% from last month</p>
                 </div>
-                <Target className="w-8 h-8 text-yellow-400" />
+                <Target className="w-8 h-8 text-app-orange" />
               </div>
             </CardContent>
           </Card>
@@ -138,27 +137,27 @@ const Sales = () => {
         {/* Sales Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Recent Sales */}
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-white flex items-center">
-                <TrendingUp className="w-5 h-5 mr-2 text-red-400" />
+              <CardTitle className="text-card-foreground flex items-center">
+                <TrendingUp className="w-5 h-5 mr-2 text-app-green" />
                 Recent Sales
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="space-y-4">
                 {recentSales.map((sale) => (
-                  <div key={sale.id} className="flex items-center justify-between p-3 bg-gray-700/30 rounded hover:bg-gray-700/50 transition-colors">
+                  <div key={sale.id} className="flex items-center justify-between p-3 bg-muted/30 rounded hover:bg-muted/50 transition-colors">
                     <div className="flex-1">
-                      <p className="text-white font-medium">{sale.id}</p>
-                      <p className="text-gray-400 text-sm">{sale.customer}</p>
-                      <div className="flex items-center text-xs text-gray-500 mt-1">
+                      <p className="text-card-foreground font-medium">{sale.id}</p>
+                      <p className="text-muted-foreground text-sm">{sale.customer}</p>
+                      <div className="flex items-center text-xs text-muted-foreground mt-1">
                         <Calendar className="w-3 h-3 mr-1" />
                         {sale.date}
                       </div>
                     </div>
                     <div className="text-right">
-                      <p className="text-white font-bold">${sale.amount.toLocaleString()}</p>
+                      <p className="text-card-foreground font-bold">${sale.amount.toLocaleString()}</p>
                       <span className={`px-2 py-1 rounded text-xs text-white ${getStatusColor(sale.status)}`}>
                         {sale.status}
                       </span>
@@ -170,10 +169,10 @@ const Sales = () => {
           </Card>
 
           {/* Sales Performance */}
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardHeader>
-              <CardTitle className="text-white flex items-center">
-                <Target className="w-5 h-5 mr-2 text-green-400" />
+              <CardTitle className="text-card-foreground flex items-center">
+                <Target className="w-5 h-5 mr-2 text-app-green" />
                 Monthly Performance
               </CardTitle>
             </CardHeader>
@@ -181,35 +180,35 @@ const Sales = () => {
               <div className="space-y-6">
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-300">Sales Target</span>
-                    <span className="text-white font-bold">$200K</span>
+                    <span className="text-muted-foreground">Sales Target</span>
+                    <span className="text-card-foreground font-bold">$200K</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-green-500 h-2 rounded-full" style={{ width: '74%' }}></div>
+                  <div className="w-full bg-muted rounded-full h-2">
+                    <div className="bg-app-green h-2 rounded-full" style={{ width: '74%' }}></div>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">74% achieved ($148K)</p>
+                  <p className="text-xs text-muted-foreground mt-1">74% achieved ($148K)</p>
                 </div>
 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-300">Customer Acquisition</span>
-                    <span className="text-white font-bold">25</span>
+                    <span className="text-muted-foreground">Customer Acquisition</span>
+                    <span className="text-card-foreground font-bold">25</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-blue-500 h-2 rounded-full" style={{ width: '83%' }}></div>
+                  <div className="w-full bg-muted rounded-full h-2">
+                    <div className="bg-app-blue h-2 rounded-full" style={{ width: '83%' }}></div>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">83% of monthly goal (30)</p>
+                  <p className="text-xs text-muted-foreground mt-1">83% of monthly goal (30)</p>
                 </div>
 
                 <div>
                   <div className="flex justify-between items-center mb-2">
-                    <span className="text-gray-300">Order Fulfillment</span>
-                    <span className="text-white font-bold">96%</span>
+                    <span className="text-muted-foreground">Order Fulfillment</span>
+                    <span className="text-card-foreground font-bold">96%</span>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div className="bg-purple-500 h-2 rounded-full" style={{ width: '96%' }}></div>
+                  <div className="w-full bg-muted rounded-full h-2">
+                    <div className="bg-app-teal h-2 rounded-full" style={{ width: '96%' }}></div>
                   </div>
-                  <p className="text-xs text-gray-400 mt-1">Excellent performance</p>
+                  <p className="text-xs text-muted-foreground mt-1">Excellent performance</p>
                 </div>
               </div>
             </CardContent>

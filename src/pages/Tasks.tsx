@@ -65,15 +65,15 @@ const Tasks = () => {
 
   const getPriorityColor = (priority: string) => {
     switch (priority) {
-      case 'High': return 'text-red-400';
-      case 'Medium': return 'text-yellow-400';
-      case 'Low': return 'text-green-400';
-      default: return 'text-gray-400';
+      case 'High': return 'text-destructive';
+      case 'Medium': return 'text-app-orange';
+      case 'Low': return 'text-app-green';
+      default: return 'text-muted-foreground';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black p-6">
+    <div className="min-h-screen bg-gradient-app p-6">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="flex items-center justify-between mb-12">
@@ -81,21 +81,20 @@ const Tasks = () => {
             <Button 
               variant="outline" 
               onClick={() => navigate('/')}
-              className="text-gray-300 border-gray-600 hover:bg-gray-700"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Dashboard
             </Button>
             <div>
-              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-teal-400 via-blue-400 to-purple-400">
+              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-primary animate-fade-in">
                 Task Manager
               </h1>
-              <p className="text-gray-300 text-lg mt-2">
+              <p className="text-app-text-secondary text-lg mt-2">
                 Assignment & Progress Tracking
               </p>
             </div>
           </div>
-          <Button className="bg-teal-600 hover:bg-teal-700">
+          <Button className="bg-app-teal hover:bg-app-teal/90">
             <Plus className="w-4 h-4 mr-2" />
             New Task
           </Button>
@@ -103,73 +102,73 @@ const Tasks = () => {
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Total Tasks</p>
-                  <p className="text-2xl font-bold text-white">{tasks.length}</p>
+                  <p className="text-muted-foreground text-sm">Total Tasks</p>
+                  <p className="text-2xl font-bold text-foreground">{tasks.length}</p>
                 </div>
-                <Clock className="w-8 h-8 text-teal-400" />
+                <Clock className="w-8 h-8 text-app-teal" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Completed</p>
-                  <p className="text-2xl font-bold text-green-400">
+                  <p className="text-muted-foreground text-sm">Completed</p>
+                  <p className="text-2xl font-bold text-app-green">
                     {tasks.filter(t => t.status === 'Completed').length}
                   </p>
                 </div>
-                <CheckCircle2 className="w-8 h-8 text-green-400" />
+                <CheckCircle2 className="w-8 h-8 text-app-green" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">In Progress</p>
-                  <p className="text-2xl font-bold text-blue-400">
+                  <p className="text-muted-foreground text-sm">In Progress</p>
+                  <p className="text-2xl font-bold text-app-blue">
                     {tasks.filter(t => t.status === 'In Progress').length}
                   </p>
                 </div>
-                <Clock className="w-8 h-8 text-blue-400" />
+                <Clock className="w-8 h-8 text-app-blue" />
               </div>
             </CardContent>
           </Card>
 
-          <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+          <Card className="bg-card/50 border-border backdrop-blur-sm">
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-gray-400 text-sm">Pending</p>
-                  <p className="text-2xl font-bold text-yellow-400">
+                  <p className="text-muted-foreground text-sm">Pending</p>
+                  <p className="text-2xl font-bold text-app-orange">
                     {tasks.filter(t => t.status === 'Pending').length}
                   </p>
                 </div>
-                <AlertCircle className="w-8 h-8 text-yellow-400" />
+                <AlertCircle className="w-8 h-8 text-app-orange" />
               </div>
             </CardContent>
           </Card>
         </div>
 
         {/* Tasks List */}
-        <Card className="bg-gray-800/50 border-gray-700 backdrop-blur-sm">
+        <Card className="bg-card/50 border-border backdrop-blur-sm">
           <CardHeader>
-            <CardTitle className="text-white">Task Overview</CardTitle>
+            <CardTitle className="text-card-foreground">Task Overview</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
               {tasks.map((task) => (
-                <div key={task.id} className="flex items-center justify-between p-4 bg-gray-700/30 rounded-lg hover:bg-gray-700/50 transition-colors">
+                <div key={task.id} className="flex items-center justify-between p-4 bg-muted/30 rounded-lg hover:bg-muted/50 transition-colors">
                   <div className="flex-1">
-                    <h3 className="text-white font-medium mb-1">{task.title}</h3>
-                    <div className="flex items-center space-x-4 text-sm text-gray-400">
+                    <h3 className="text-card-foreground font-medium mb-1">{task.title}</h3>
+                    <div className="flex items-center space-x-4 text-sm text-muted-foreground">
                       <div className="flex items-center">
                         <User className="w-4 h-4 mr-1" />
                         {task.assignee}
@@ -178,7 +177,7 @@ const Tasks = () => {
                         <Calendar className="w-4 h-4 mr-1" />
                         {task.dueDate}
                       </div>
-                      <span className={`px-2 py-1 rounded text-xs ${task.category === 'HR' ? 'bg-purple-600' : task.category === 'Sales' ? 'bg-green-600' : task.category === 'Inventory' ? 'bg-blue-600' : 'bg-orange-600'} text-white`}>
+                      <span className={`px-2 py-1 rounded text-xs ${task.category === 'HR' ? 'bg-app-teal' : task.category === 'Sales' ? 'bg-app-green' : task.category === 'Inventory' ? 'bg-app-blue' : 'bg-app-orange'} text-white`}>
                         {task.category}
                       </span>
                     </div>
