@@ -22,7 +22,7 @@ const AdvanceVoucher = () => {
       icon: DollarSign,
       color: 'from-emerald-500 to-emerald-700',
       description: 'Manage employee deductions',
-      path: '/hr/advance-voucher/add-deductions'
+      path: '/reports/advance-voucher/add-deductions'
     },
     {
       id: 'voucher-report',
@@ -30,7 +30,7 @@ const AdvanceVoucher = () => {
       icon: FileText,
       color: 'from-blue-500 to-blue-700',
       description: 'View voucher reports',
-      path: '/hr/advance-voucher/voucher-report'
+      path: '/reports/advance-voucher/voucher-report'
     },
     {
       id: 'voucher-statement',
@@ -38,7 +38,7 @@ const AdvanceVoucher = () => {
       icon: FileText,
       color: 'from-green-500 to-green-700',
       description: 'Employee voucher statements',
-      path: '/hr/advance-voucher/voucher-statement'
+      path: '/reports/advance-voucher/voucher-statement'
     },
     {
       id: 'voucher-pending',
@@ -46,7 +46,7 @@ const AdvanceVoucher = () => {
       icon: Clock,
       color: 'from-yellow-500 to-yellow-700',
       description: 'Pending voucher approvals',
-      path: '/hr/advance-voucher/voucher-pending'
+      path: '/reports/advance-voucher/voucher-pending'
     },
     {
       id: 'guarantee-report',
@@ -54,7 +54,7 @@ const AdvanceVoucher = () => {
       icon: Shield,
       color: 'from-purple-500 to-purple-700',
       description: 'Guarantee voucher list',
-      path: '/hr/advance-voucher/guarantee-report'
+      path: '/reports/advance-voucher/guarantee-report'
     },
     {
       id: 'official-business',
@@ -62,7 +62,7 @@ const AdvanceVoucher = () => {
       icon: Briefcase,
       color: 'from-indigo-500 to-indigo-700',
       description: 'Official business vouchers',
-      path: '/hr/advance-voucher/official-business'
+      path: '/reports/advance-voucher/official-business'
     }
   ];
 
@@ -74,10 +74,10 @@ const AdvanceVoucher = () => {
           <div className="flex items-center space-x-4">
             <Button 
               variant="outline" 
-              onClick={() => navigate('/hr')}
+              onClick={() => navigate('/reports')}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to HR
+              Back to Reports
             </Button>
             <div>
               <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-primary animate-fade-in">

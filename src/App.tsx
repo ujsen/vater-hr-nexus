@@ -134,37 +134,37 @@ const App = () => (
                 <DrivingLicense />
               </ProtectedRoute>
             } />
-            <Route path="/hr/advance-voucher" element={
+            <Route path="/reports/advance-voucher" element={
               <ProtectedRoute>
                 <AdvanceVoucher />
               </ProtectedRoute>
             } />
-            <Route path="/hr/advance-voucher/add-deductions" element={
+            <Route path="/reports/advance-voucher/add-deductions" element={
               <ProtectedRoute>
                 <AddDeductions />
               </ProtectedRoute>
             } />
-            <Route path="/hr/advance-voucher/voucher-report" element={
+            <Route path="/reports/advance-voucher/voucher-report" element={
               <ProtectedRoute>
                 <VoucherReport />
               </ProtectedRoute>
             } />
-            <Route path="/hr/advance-voucher/voucher-statement" element={
+            <Route path="/reports/advance-voucher/voucher-statement" element={
               <ProtectedRoute>
                 <VoucherStatement />
               </ProtectedRoute>
             } />
-            <Route path="/hr/advance-voucher/voucher-pending" element={
+            <Route path="/reports/advance-voucher/voucher-pending" element={
               <ProtectedRoute>
                 <VoucherPending />
               </ProtectedRoute>
             } />
-            <Route path="/hr/advance-voucher/guarantee-report" element={
+            <Route path="/reports/advance-voucher/guarantee-report" element={
               <ProtectedRoute>
                 <GuaranteeReport />
               </ProtectedRoute>
             } />
-            <Route path="/hr/advance-voucher/official-business" element={
+            <Route path="/reports/advance-voucher/official-business" element={
               <ProtectedRoute>
                 <OfficialBusiness />
               </ProtectedRoute>

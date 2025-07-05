@@ -100,14 +100,6 @@ const Hr = () => {
       path: '/hr/driving-license'
     },
     {
-      id: 'advance-voucher',
-      title: 'Advance Voucher',
-      icon: DollarSign,
-      color: 'from-emerald-500 to-emerald-700',
-      description: 'Employee Advance Payments',
-      path: '/hr/advance-voucher'
-    },
-    {
       id: 'tensile',
       title: 'Tensile (Q)',
       icon: Award,
