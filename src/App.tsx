@@ -26,6 +26,12 @@ import ManpowerStandby from "./pages/hr/ManpowerStandby";
 import Documents from "./pages/hr/Documents";
 import DrivingLicense from "./pages/hr/DrivingLicense";
 import AdvanceVoucher from "./pages/hr/AdvanceVoucher";
+import AddDeductions from "./pages/hr/advance-voucher/AddDeductions";
+import VoucherReport from "./pages/hr/advance-voucher/VoucherReport";
+import VoucherStatement from "./pages/hr/advance-voucher/VoucherStatement";
+import VoucherPending from "./pages/hr/advance-voucher/VoucherPending";
+import GuaranteeReport from "./pages/hr/advance-voucher/GuaranteeReport";
+import OfficialBusiness from "./pages/hr/advance-voucher/OfficialBusiness";
 import Workshop from "./pages/Workshop";
 import Reports from "./pages/Reports";
 import Logistics from "./pages/Logistics";
@@ -131,6 +137,36 @@ const App = () => (
             <Route path="/hr/advance-voucher" element={
               <ProtectedRoute>
                 <AdvanceVoucher />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/advance-voucher/add-deductions" element={
+              <ProtectedRoute>
+                <AddDeductions />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/advance-voucher/voucher-report" element={
+              <ProtectedRoute>
+                <VoucherReport />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/advance-voucher/voucher-statement" element={
+              <ProtectedRoute>
+                <VoucherStatement />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/advance-voucher/voucher-pending" element={
+              <ProtectedRoute>
+                <VoucherPending />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/advance-voucher/guarantee-report" element={
+              <ProtectedRoute>
+                <GuaranteeReport />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/advance-voucher/official-business" element={
+              <ProtectedRoute>
+                <OfficialBusiness />
               </ProtectedRoute>
             } />
             <Route path="/workshop" element={
