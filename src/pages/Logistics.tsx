@@ -39,6 +39,54 @@ const Logistics = () => {
           </div>
         </div>
 
+        {/* Logistics Modules */}
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-card-foreground mb-8 text-center">
+            أدارة الخدمات اللوجستية
+          </h2>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center">
+            {/* WorkShop */}
+            <div className="flex flex-col items-center group cursor-pointer">
+              <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Truck className="w-8 h-8 text-app-blue" />
+              </div>
+              <span className="text-card-foreground font-medium text-sm text-center">WorkShop</span>
+            </div>
+
+            {/* Vehicle Data */}
+            <div className="flex flex-col items-center group cursor-pointer">
+              <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Package className="w-8 h-8 text-app-teal" />
+              </div>
+              <span className="text-card-foreground font-medium text-sm text-center">Vehicle Data</span>
+            </div>
+
+            {/* Update Vehicle */}
+            <div className="flex flex-col items-center group cursor-pointer">
+              <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <MapPin className="w-8 h-8 text-app-orange" />
+              </div>
+              <span className="text-card-foreground font-medium text-sm text-center">Update Vehicle</span>
+            </div>
+
+            {/* Complaints */}
+            <div className="flex flex-col items-center group cursor-pointer">
+              <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Users className="w-8 h-8 text-app-green" />
+              </div>
+              <span className="text-card-foreground font-medium text-sm text-center">Complaints</span>
+            </div>
+
+            {/* Task */}
+            <div className="flex flex-col items-center group cursor-pointer">
+              <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <Clock className="w-8 h-8 text-primary" />
+              </div>
+              <span className="text-card-foreground font-medium text-sm text-center">Task</span>
+            </div>
+          </div>
+        </div>
+
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
           {/* Active Shipments */}
