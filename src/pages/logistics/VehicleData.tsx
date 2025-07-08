@@ -1,10 +1,24 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, Car, Database, FileText } from "lucide-react";
+import { ArrowLeft, Car, CheckSquare, FileText, Users, Fuel, Monitor, Shield, Truck, Wrench, Settings, Plus } from "lucide-react";
 
 const VehicleData = () => {
   const navigate = useNavigate();
+
+  const vehicleModules = [
+    { name: "Vehicle Record", icon: Car, color: "text-app-blue" },
+    { name: "MVPI Record", icon: CheckSquare, color: "text-app-green" },
+    { name: "Registration Record", icon: FileText, color: "text-app-teal" },
+    { name: "Transfer Vehicle/EQ Custody", icon: Users, color: "text-app-orange" },
+    { name: "Authorized Record", icon: Shield, color: "text-app-green" },
+    { name: "Fuel and Oil Change Record", icon: Fuel, color: "text-destructive" },
+    { name: "OperationCard Record", icon: Monitor, color: "text-app-blue" },
+    { name: "ThirdParty Record", icon: Users, color: "text-app-teal" },
+    { name: "STANDBY", icon: Truck, color: "text-app-orange" },
+    { name: "Assets Movement", icon: Wrench, color: "text-app-blue" },
+    { name: "Add & Update Vehical", icon: Plus, color: "text-app-green" },
+    { name: "Update Custody Attach", icon: Settings, color: "text-app-orange" }
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-app p-6">
@@ -17,97 +31,30 @@ const VehicleData = () => {
               onClick={() => navigate('/logistics')}
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Logistics
+              Back
             </Button>
-            <div>
-              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-primary animate-fade-in">
-                Vehicle Data Management
-              </h1>
-              <p className="text-app-text-secondary text-lg mt-2">
-                Fleet Information & Documentation
-              </p>
-            </div>
           </div>
         </div>
 
-        {/* Vehicle Data Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="bg-card/50 border-border backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-card-foreground flex items-center">
-                <Car className="w-5 h-5 mr-2 text-app-blue" />
-                Fleet Overview
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center p-3 bg-muted/30 rounded">
-                  <div>
-                    <p className="text-card-foreground font-medium">TR-001</p>
-                    <p className="text-muted-foreground text-sm">Mercedes Actros</p>
-                  </div>
-                  <span className="px-2 py-1 bg-app-green text-white text-xs rounded">Active</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-muted/30 rounded">
-                  <div>
-                    <p className="text-card-foreground font-medium">TR-002</p>
-                    <p className="text-muted-foreground text-sm">Volvo FH16</p>
-                  </div>
-                  <span className="px-2 py-1 bg-app-orange text-white text-xs rounded">Maintenance</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+        {/* Title */}
+        <div className="text-center mb-12">
+          <h1 className="text-5xl font-bold text-card-foreground">
+            Vehicle <span className="text-destructive">Information</span>
+          </h1>
+        </div>
 
-          <Card className="bg-card/50 border-border backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-card-foreground flex items-center">
-                <Database className="w-5 h-5 mr-2 text-app-green" />
-                Vehicle Statistics
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Total Vehicles</span>
-                  <span className="text-foreground font-bold">23</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Operational</span>
-                  <span className="text-app-green font-bold">20</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Under Maintenance</span>
-                  <span className="text-app-orange font-bold">3</span>
-                </div>
+        {/* Vehicle Modules Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center max-w-6xl mx-auto">
+          {vehicleModules.map((module, index) => (
+            <div key={index} className="flex flex-col items-center group cursor-pointer hover:scale-105 transition-transform">
+              <div className="w-24 h-24 bg-white rounded-full flex items-center justify-center mb-4 shadow-lg border-2 border-border">
+                <module.icon className={`w-12 h-12 ${module.color}`} />
               </div>
-            </CardContent>
-          </Card>
-
-          <Card className="bg-card/50 border-border backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-card-foreground flex items-center">
-                <FileText className="w-5 h-5 mr-2 text-app-teal" />
-                Documentation
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Registration Docs</span>
-                  <span className="text-app-green font-bold">✓</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Insurance Valid</span>
-                  <span className="text-app-green font-bold">✓</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Permits Updated</span>
-                  <span className="text-app-orange font-bold">⚠</span>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
+              <span className="text-card-foreground font-medium text-sm text-center max-w-[120px] leading-tight">
+                {module.name}
+              </span>
+            </div>
+          ))}
         </div>
       </div>
     </div>

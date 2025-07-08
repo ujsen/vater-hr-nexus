@@ -1,114 +1,141 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { useNavigate } from "react-router-dom";
-import { ArrowLeft, CheckSquare, Clock, Users } from "lucide-react";
+import { ArrowLeft, Plus, Search, Home, ClipboardList, User, Settings } from "lucide-react";
 
 const Task = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="min-h-screen bg-gradient-app p-6">
-      <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center space-x-4">
-            <Button 
-              variant="outline" 
-              onClick={() => navigate('/logistics')}
-            >
-              <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Logistics
-            </Button>
-            <div>
-              <h1 className="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-primary animate-fade-in">
-                Task Management
-              </h1>
-              <p className="text-app-text-secondary text-lg mt-2">
-                Operations & Assignment Tracking
-              </p>
-            </div>
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Header */}
+      <div className="bg-gray-800 p-4 flex items-center justify-between">
+        <div className="flex items-center space-x-4">
+          <Search className="w-5 h-5 text-gray-400" />
+          <input 
+            type="text" 
+            placeholder="Search" 
+            className="bg-gray-700 text-white px-3 py-1 rounded border-none outline-none"
+          />
+        </div>
+        <div className="flex items-center space-x-4">
+          <span className="text-gray-300">Welcome :</span>
+          <span className="text-red-400 font-bold">AL-Shebami</span>
+        </div>
+      </div>
+
+      {/* Navigation Bar */}
+      <div className="bg-gray-800 p-4 flex items-center justify-between border-t border-gray-700">
+        <div className="flex items-center space-x-6">
+          <div className="flex items-center space-x-2 text-red-500">
+            <div className="w-2 h-2 bg-red-500 rounded-full"></div>
+            <span>Inbox</span>
+          </div>
+          <div className="flex items-center space-x-2 text-yellow-500">
+            <div className="w-2 h-2 bg-yellow-500 rounded-full"></div>
+            <span>Send</span>
+          </div>
+        </div>
+        <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded flex items-center space-x-2">
+          <Plus className="w-4 h-4" />
+          <span>New Task</span>
+        </Button>
+      </div>
+
+      {/* Sidebar and Main Content */}
+      <div className="flex">
+        {/* Sidebar */}
+        <div className="w-16 bg-gray-800 min-h-screen flex flex-col items-center py-6 space-y-6">
+          <div className="flex flex-col items-center space-y-2 text-blue-400">
+            <Home className="w-6 h-6" />
+            <span className="text-xs">Home</span>
+          </div>
+          <div className="flex flex-col items-center space-y-2 text-gray-400">
+            <ClipboardList className="w-6 h-6" />
+            <span className="text-xs">Tasks Status</span>
+          </div>
+          <div className="flex flex-col items-center space-y-2 text-gray-400">
+            <User className="w-6 h-6" />
+            <span className="text-xs">Admin</span>
           </div>
         </div>
 
-        {/* Task Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <Card className="bg-card/50 border-border backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-card-foreground flex items-center">
-                <CheckSquare className="w-5 h-5 mr-2 text-app-blue" />
-                Active Tasks
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center p-3 bg-muted/30 rounded">
-                  <div>
-                    <p className="text-card-foreground font-medium">TSK-001</p>
-                    <p className="text-muted-foreground text-sm">Route Planning</p>
-                  </div>
-                  <span className="px-2 py-1 bg-app-green text-white text-xs rounded">In Progress</span>
-                </div>
-                <div className="flex justify-between items-center p-3 bg-muted/30 rounded">
-                  <div>
-                    <p className="text-card-foreground font-medium">TSK-002</p>
-                    <p className="text-muted-foreground text-sm">Vehicle Inspection</p>
-                  </div>
-                  <span className="px-2 py-1 bg-app-orange text-white text-xs rounded">Pending</span>
-                </div>
+        {/* Main Task Board */}
+        <div className="flex-1 p-6">
+          <div className="grid grid-cols-4 gap-6">
+            {/* Need Approval Column */}
+            <div className="bg-gray-800 rounded-lg">
+              <div className="bg-green-600 text-white p-3 rounded-t-lg flex items-center justify-between">
+                <span className="font-medium">Need Approval (0)</span>
+                <Settings className="w-4 h-4" />
               </div>
-            </CardContent>
-          </Card>
+              <div className="p-4 min-h-[400px]">
+                {/* Empty column */}
+              </div>
+            </div>
 
-          <Card className="bg-card/50 border-border backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-card-foreground flex items-center">
-                <Clock className="w-5 h-5 mr-2 text-app-green" />
-                Task Schedule
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="text-sm">
-                  <p className="text-card-foreground">Driver assignment completed</p>
-                  <p className="text-muted-foreground">Due: Today 3:00 PM</p>
-                </div>
-                <div className="text-sm">
-                  <p className="text-card-foreground">Route optimization review</p>
-                  <p className="text-muted-foreground">Due: Tomorrow 9:00 AM</p>
-                </div>
-                <div className="text-sm">
-                  <p className="text-card-foreground">Fleet maintenance check</p>
-                  <p className="text-muted-foreground">Due: Friday 2:00 PM</p>
-                </div>
+            {/* New Task Column */}
+            <div className="bg-gray-800 rounded-lg">
+              <div className="bg-red-600 text-white p-3 rounded-t-lg flex items-center justify-between">
+                <span className="font-medium">New Task (1)</span>
+                <Settings className="w-4 h-4" />
               </div>
-            </CardContent>
-          </Card>
+              <div className="p-4 min-h-[400px]">
+                {/* Task Card */}
+                <Card className="bg-white text-black mb-4">
+                  <CardContent className="p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <span className="text-sm text-gray-600">Date :2022-12-11</span>
+                      <Button variant="ghost" size="sm">📎</Button>
+                    </div>
+                    <div className="text-blue-600 text-sm mb-2">
+                      المولدات في المحيل - From : 
+                      <br />AL-Shebami
+                    </div>
+                    <div className="text-gray-800 text-sm">
+                      هل يتم عمل تشغيل للمولدات
+                      <br />بشكل دوري يومي تحديث
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </div>
 
-          <Card className="bg-card/50 border-border backdrop-blur-sm">
-            <CardHeader>
-              <CardTitle className="text-card-foreground flex items-center">
-                <Users className="w-5 h-5 mr-2 text-app-teal" />
-                Team Performance
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-3">
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Tasks Completed</span>
-                  <span className="text-foreground font-bold">24</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Tasks In Progress</span>
-                  <span className="text-app-orange font-bold">8</span>
-                </div>
-                <div className="flex justify-between items-center">
-                  <span className="text-muted-foreground">Team Efficiency</span>
-                  <span className="text-app-green font-bold">89%</span>
-                </div>
+            {/* In Progress Column */}
+            <div className="bg-gray-800 rounded-lg">
+              <div className="bg-yellow-600 text-white p-3 rounded-t-lg flex items-center justify-between">
+                <span className="font-medium">In progress (0)</span>
+                <Settings className="w-4 h-4" />
               </div>
-            </CardContent>
-          </Card>
+              <div className="p-4 min-h-[400px]">
+                {/* Empty column */}
+              </div>
+            </div>
+
+            {/* Done Column */}
+            <div className="bg-gray-800 rounded-lg">
+              <div className="bg-blue-600 text-white p-3 rounded-t-lg flex items-center justify-between">
+                <span className="font-medium">Done (0)</span>
+                <Settings className="w-4 h-4" />
+              </div>
+              <div className="p-4 min-h-[400px]">
+                {/* Empty column */}
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+
+      {/* Back Button */}
+      <div className="fixed bottom-6 left-6">
+        <Button 
+          variant="outline" 
+          onClick={() => navigate('/logistics')}
+          className="bg-gray-800 border-gray-600 text-white hover:bg-gray-700"
+        >
+          <ArrowLeft className="w-4 h-4 mr-2" />
+          Back
+        </Button>
       </div>
     </div>
   );
