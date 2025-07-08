@@ -46,7 +46,7 @@ const Logistics = () => {
           </h2>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 justify-items-center">
             {/* WorkShop */}
-            <div className="flex flex-col items-center group cursor-pointer">
+            <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigate('/logistics/workshop')}>
               <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <Truck className="w-8 h-8 text-app-blue" />
               </div>
@@ -54,7 +54,7 @@ const Logistics = () => {
             </div>
 
             {/* Vehicle Data */}
-            <div className="flex flex-col items-center group cursor-pointer">
+            <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigate('/logistics/vehicle-data')}>
               <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <Package className="w-8 h-8 text-app-teal" />
               </div>
@@ -62,7 +62,7 @@ const Logistics = () => {
             </div>
 
             {/* Update Vehicle */}
-            <div className="flex flex-col items-center group cursor-pointer">
+            <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigate('/logistics/update-vehicle')}>
               <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <MapPin className="w-8 h-8 text-app-orange" />
               </div>
@@ -70,7 +70,7 @@ const Logistics = () => {
             </div>
 
             {/* Complaints */}
-            <div className="flex flex-col items-center group cursor-pointer">
+            <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigate('/logistics/complaints')}>
               <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <Users className="w-8 h-8 text-app-green" />
               </div>
@@ -78,7 +78,7 @@ const Logistics = () => {
             </div>
 
             {/* Task */}
-            <div className="flex flex-col items-center group cursor-pointer">
+            <div className="flex flex-col items-center group cursor-pointer" onClick={() => navigate('/logistics/task')}>
               <div className="w-20 h-20 bg-card border-2 border-border rounded-full flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
                 <Clock className="w-8 h-8 text-primary" />
               </div>

@@ -41,6 +41,11 @@ import Projects from "./pages/Projects";
 import Purchase from "./pages/Purchase";
 import Store from "./pages/Store";
 import PlatformInfo from "./pages/reports/PlatformInfo";
+import LogisticsWorkshop from "./pages/logistics/Workshop";
+import VehicleData from "./pages/logistics/VehicleData";
+import UpdateVehicle from "./pages/logistics/UpdateVehicle";
+import LogisticsComplaints from "./pages/logistics/Complaints";
+import LogisticsTask from "./pages/logistics/Task";
 
 const queryClient = new QueryClient();
 
@@ -212,6 +217,31 @@ const App = () => (
             <Route path="/reports/platform-info" element={
               <ProtectedRoute>
                 <PlatformInfo />
+              </ProtectedRoute>
+            } />
+            <Route path="/logistics/workshop" element={
+              <ProtectedRoute>
+                <LogisticsWorkshop />
+              </ProtectedRoute>
+            } />
+            <Route path="/logistics/vehicle-data" element={
+              <ProtectedRoute>
+                <VehicleData />
+              </ProtectedRoute>
+            } />
+            <Route path="/logistics/update-vehicle" element={
+              <ProtectedRoute>
+                <UpdateVehicle />
+              </ProtectedRoute>
+            } />
+            <Route path="/logistics/complaints" element={
+              <ProtectedRoute>
+                <LogisticsComplaints />
+              </ProtectedRoute>
+            } />
+            <Route path="/logistics/task" element={
+              <ProtectedRoute>
+                <LogisticsTask />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
