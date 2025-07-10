@@ -3,6 +3,7 @@ import React from 'react';
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { useNavigate } from "react-router-dom";
 import { 
   Mail, 
   Phone, 
@@ -12,7 +13,8 @@ import {
   Users, 
   MoreVertical,
   Edit,
-  Trash2
+  Trash2,
+  Eye
 } from "lucide-react";
 
 interface Employee {
@@ -35,6 +37,8 @@ interface EmployeeCardProps {
 }
 
 export const EmployeeCard = ({ employee, onEdit, onDelete }: EmployeeCardProps) => {
+  const navigate = useNavigate();
+  
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Active": return "bg-green-500";
@@ -67,10 +71,17 @@ export const EmployeeCard = ({ employee, onEdit, onDelete }: EmployeeCardProps) 
               <Button variant="ghost" size="sm">
                 <MoreVertical className="w-4 h-4 text-gray-400" />
               </Button>
-              <div className="absolute right-0 top-8 bg-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 min-w-[120px]">
+              <div className="absolute right-0 top-8 bg-gray-700 rounded-md shadow-lg opacity-0 group-hover:opacity-100 transition-opacity z-10 min-w-[140px]">
+                <button 
+                  onClick={() => navigate(`/hr/employee/${employee.id}`)}
+                  className="flex items-center w-full px-3 py-2 text-sm text-white hover:bg-gray-600 rounded-t-md"
+                >
+                  <Eye className="w-3 h-3 mr-2" />
+                  View Details
+                </button>
                 <button 
                   onClick={() => onEdit(employee)}
-                  className="flex items-center w-full px-3 py-2 text-sm text-white hover:bg-gray-600 rounded-t-md"
+                  className="flex items-center w-full px-3 py-2 text-sm text-white hover:bg-gray-600"
                 >
                   <Edit className="w-3 h-3 mr-2" />
                   Edit

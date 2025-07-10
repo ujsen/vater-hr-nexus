@@ -1,7 +1,8 @@
 
 import { Button } from "@/components/ui/button";
 import { TableCell, TableRow } from "@/components/ui/table";
-import { Edit, Trash2 } from "lucide-react";
+import { Edit, Trash2, Eye } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 interface EmployeeTableRowProps {
   employee: any;
@@ -10,6 +11,8 @@ interface EmployeeTableRowProps {
 }
 
 export const EmployeeTableRow = ({ employee, onEdit, onDelete }: EmployeeTableRowProps) => {
+  const navigate = useNavigate();
+  
   const getStatusColor = (status: string) => {
     switch (status) {
       case "Active": return "text-green-400";
@@ -39,6 +42,14 @@ export const EmployeeTableRow = ({ employee, onEdit, onDelete }: EmployeeTableRo
       <TableCell className="text-gray-300">{employee.emergencyContact}</TableCell>
       <TableCell>
         <div className="flex space-x-2">
+          <Button
+            size="sm"
+            variant="outline"
+            onClick={() => navigate(`/hr/employee/${employee.id}`)}
+            className="text-green-400 border-green-400 hover:bg-green-400/10"
+          >
+            <Eye className="w-3 h-3" />
+          </Button>
           <Button
             size="sm"
             variant="outline"

@@ -29,6 +29,7 @@ import AdvanceVoucher from "./pages/hr/AdvanceVoucher";
 import AddDeductions from "./pages/hr/advance-voucher/AddDeductions";
 import VoucherReport from "./pages/hr/advance-voucher/VoucherReport";
 import VoucherStatement from "./pages/hr/advance-voucher/VoucherStatement";
+import EmployeeDetail from "./pages/hr/EmployeeDetail";
 import VoucherPending from "./pages/hr/advance-voucher/VoucherPending";
 import GuaranteeReport from "./pages/hr/advance-voucher/GuaranteeReport";
 import OfficialBusiness from "./pages/hr/advance-voucher/OfficialBusiness";
@@ -242,6 +243,11 @@ const App = () => (
             <Route path="/logistics/task" element={
               <ProtectedRoute>
                 <LogisticsTask />
+              </ProtectedRoute>
+            } />
+            <Route path="/hr/employee/:employeeId" element={
+              <ProtectedRoute>
+                <EmployeeDetail />
               </ProtectedRoute>
             } />
             <Route path="*" element={<NotFound />} />
